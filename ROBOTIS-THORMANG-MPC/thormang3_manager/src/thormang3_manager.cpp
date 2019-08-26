@@ -46,10 +46,11 @@ int main(int argc, char **argv)
     robotis_framework::RobotisController *controller = robotis_framework::RobotisController::getInstance();
 
     /* Load ROS Parameter */
-    std::string offset_file = nh.param<std::string>("offset_file_path", "");
-    std::string robot_file  = nh.param<std::string>("robot_file_path", "");
+    std::string offset_file     = nh.param<std::string>("offset_file_path", "");
+    std::string robot_file      = nh.param<std::string>("robot_file_path", "");
 
-    std::string init_file   = nh.param<std::string>("init_file_path", "");
+    std::string init_file       = nh.param<std::string>("init_file_path", "");
+    std::string seed_init_file  = nh.param<std::string>("seed_init_file_path", "");
 
     /* gazebo simulation */
     controller->gazebo_mode_ = nh.param<bool>("gazebo", false);
@@ -67,6 +68,9 @@ int main(int argc, char **argv)
         return -1;
     }
 
+    if(seed_init_file != "")
+        controller->initializeSeed(seed_init_file);
+
     if(controller->initialize(robot_file, init_file) == false)
     {
         ROS_ERROR("ROBOTIS Controller Initialize Fail!");
@@ -79,15 +83,15 @@ int main(int argc, char **argv)
     sleep(1);
 
     /* Add Sensor Module */
-    controller->addSensorModule((robotis_framework::SensorModule*)FeetForceTorqueSensor::getInstance());
+    // controller->addSensorModule((robotis_framework::SensorModule*)FeetForceTorqueSensor::getInstance());
 
     /* Add Motion Module */
     controller->addMotionModule((robotis_framework::MotionModule*)BaseModule::getInstance());
     controller->addMotionModule((robotis_framework::MotionModule*)ActionModule::getInstance());
     controller->addMotionModule((robotis_framework::MotionModule*)ManipulationModule::getInstance());
-    controller->addMotionModule((robotis_framework::MotionModule*)GripperModule::getInstance());
+    // controller->addMotionModule((robotis_framework::MotionModule*)GripperModule::getInstance());
     controller->addMotionModule((robotis_framework::MotionModule*)HeadControlModule::getInstance());
-    controller->addMotionModule((robotis_framework::MotionModule*)OnlineWalkingModule::getInstance());
+    // controller->addMotionModule((robotis_framework::MotionModule*)OnlineWalkingModule::getInstance());
 
     controller->startTimer();
 

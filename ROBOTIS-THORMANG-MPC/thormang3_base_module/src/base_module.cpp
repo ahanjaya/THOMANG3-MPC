@@ -56,17 +56,22 @@ BaseModule::BaseModule()
   result_["r_arm_wr_p"]   = new robotis_framework::DynamixelState();
   result_["l_arm_wr_p"]   = new robotis_framework::DynamixelState();
 
+  /* 
+  note: to be able move finger joint "kinematics_dynamics_define.h " change #define MAX_JOINT_ID    (112)
+  "File": catkin_ws/src/ROBOTIS-THORMANG-MPC/thormang3_kinematics_dynamics/include/kinematics_dynamics_define.h 
+  but will be error in manipulation mode
+  */
   /* seed robotics */
   // result_["r_arm_thumb_y"]   = new robotis_framework::DynamixelState();
-  result_["l_arm_thumb_y"]   = new robotis_framework::DynamixelState();
+  // result_["l_arm_thumb_y"]   = new robotis_framework::DynamixelState();
   // result_["r_arm_thumb_p"]   = new robotis_framework::DynamixelState();
-  result_["l_arm_thumb_p"]   = new robotis_framework::DynamixelState();
-  result_["r_arm_index_p"]   = new robotis_framework::DynamixelState();
-  result_["l_arm_index_p"]   = new robotis_framework::DynamixelState();
-  result_["r_arm_middle_p"]   = new robotis_framework::DynamixelState();
-  result_["l_arm_middle_p"]   = new robotis_framework::DynamixelState();  
-  result_["r_arm_finger45_p"] = new robotis_framework::DynamixelState();
-  result_["l_arm_finger45_p"] = new robotis_framework::DynamixelState();
+  // result_["l_arm_thumb_p"]   = new robotis_framework::DynamixelState();
+  // result_["r_arm_index_p"]   = new robotis_framework::DynamixelState();
+  // result_["l_arm_index_p"]   = new robotis_framework::DynamixelState();
+  // result_["r_arm_middle_p"]   = new robotis_framework::DynamixelState();
+  // result_["l_arm_middle_p"]   = new robotis_framework::DynamixelState();  
+  // result_["r_arm_finger45_p"] = new robotis_framework::DynamixelState();
+  // result_["l_arm_finger45_p"] = new robotis_framework::DynamixelState();
 
   /* gripper */
   // result_["r_arm_grip"]   = new robotis_framework::DynamixelState();
@@ -111,15 +116,15 @@ BaseModule::BaseModule()
 
   /* seed robotics */
   // joint_name_to_id_["r_arm_thumb_y"]    = 103;
-  joint_name_to_id_["l_arm_thumb_y"]    = 104;
+  // joint_name_to_id_["l_arm_thumb_y"]    = 104;
   // joint_name_to_id_["r_arm_thumb_p"]    = 105;
-  joint_name_to_id_["l_arm_thumb_p"]    = 106;
-  joint_name_to_id_["r_arm_index_p"]    = 107;
-  joint_name_to_id_["l_arm_index_p"]    = 108;
-  joint_name_to_id_["r_arm_middle_p"]   = 109;
-  joint_name_to_id_["l_arm_middle_p"]   = 110;
-  joint_name_to_id_["r_arm_finger45_p"] = 111;
-  joint_name_to_id_["l_arm_finger45_p"] = 112;
+  // joint_name_to_id_["l_arm_thumb_p"]    = 106;
+  // joint_name_to_id_["r_arm_index_p"]    = 107;
+  // joint_name_to_id_["l_arm_index_p"]    = 108;
+  // joint_name_to_id_["r_arm_middle_p"]   = 109;
+  // joint_name_to_id_["l_arm_middle_p"]   = 110;
+  // joint_name_to_id_["r_arm_finger45_p"] = 111;
+  // joint_name_to_id_["l_arm_finger45_p"] = 112;
 
   /* leg */
   // joint_name_to_id_["r_leg_hip_y"]  = 15;

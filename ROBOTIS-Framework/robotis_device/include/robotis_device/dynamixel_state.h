@@ -51,6 +51,7 @@ public:
   int       velocity_p_gain_;
   int       velocity_i_gain_;
   int       velocity_d_gain_;
+  // int       alarm_condition_;
 
   std::map<std::string, uint32_t> bulk_read_table_;
 
@@ -70,6 +71,7 @@ public:
       velocity_p_gain_(65535),
       velocity_i_gain_(65535),
       velocity_d_gain_(65535),
+      // alarm_condition_(0),
       position_offset_(0)
   {
     bulk_read_table_.clear();

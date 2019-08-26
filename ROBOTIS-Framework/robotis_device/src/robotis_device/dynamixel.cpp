@@ -47,6 +47,7 @@ Dynamixel::Dynamixel(int id, std::string model_name, float protocol_version)
     velocity_p_gain_item_(0),
     velocity_i_gain_item_(0),
     velocity_d_gain_item_(0)
+    // alarm_shutdown_item_(0)
 {
   this->id_ = id;
   this->model_name_ = model_name;

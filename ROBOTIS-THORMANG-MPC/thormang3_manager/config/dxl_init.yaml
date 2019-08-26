@@ -1,32 +1,101 @@
-# r_arm_wr_r :   # Seed Robotics smart actuators
-#    torque_enable         :  1    # item name : value
+r_arm_wr_r :   # Seed-67
+   return_delay_time     :  0    # item name : value
+   alarm_shutdown        :  36
+   CCW_angle_limit       :  4095
+   CW_angle_limit        :  0
 
-# r_arm_wr_y :   # Seed Robotics smart actuators
-#    torque_enable         :  1    # item name : value
+l_arm_wr_r :   # Seed-67
+   return_delay_time     :  0    # item name : value
+   alarm_shutdown        :  36
+   CCW_angle_limit       :  4095
+   CW_angle_limit        :  0
 
-# r_arm_wr_p :   # Seed Robotics smart actuators
-#    torque_enable         :  1    # item name : value
-
-# r_arm_thumb_y :   # Seed Robotics smart actuators
-#    torque_enable         :  1    # item name : value
-#    return_delay_time     :  10
-#    goal_position           : 0
-
-# r_arm_thumb_p :   # Seed Robotics smart actuators
-#    return_delay_time     :  10
-#    goal_position           : 0
-
-# l_arm_thumb_y :   # Seed Robotics smart actuators
-#    return_delay_time     :  10
-#    goal_position           : 0
-
-# l_arm_thumb_p :   # Seed Robotics smart actuators
-#    torque_enable         :  1    # item name : value
-#    return_delay_time     :  10
-#    goal_position           : 0
-
+r_arm_wr_y :   # Seed-67
+   return_delay_time     :  0    # item name : value
+   alarm_shutdown        :  36
+   CCW_angle_limit       :  4095
+   CW_angle_limit        :  0
+   
+l_arm_wr_y :   # Seed-67
+   return_delay_time     :  0    # item name : value
+   alarm_shutdown        :  36
+   CCW_angle_limit       :  4095
+   CW_angle_limit        :  0
+   
+r_arm_wr_p :   # Seed-67
+   return_delay_time     :  0    # item name : value
+   alarm_shutdown        :  36
+   CCW_angle_limit       :  4095
+   CW_angle_limit        :  0
+   
+l_arm_wr_p :   # Seed-67
+   return_delay_time     :  0    # item name : value
+   alarm_shutdown        :  36
+   CCW_angle_limit       :  4095
+   CW_angle_limit        :  0
+   
+r_arm_thumb_y :   # Seed-56
+   return_delay_time     :  0    # item name : value
+   alarm_shutdown        :  36
+   CCW_angle_limit       :  4095
+   CW_angle_limit        :  0
+   
+l_arm_thumb_y :   # Seed-56
+   return_delay_time     :  0    # item name : value
+   alarm_shutdown        :  36
+   CCW_angle_limit       :  4095
+   CW_angle_limit        :  0
+   
+r_arm_thumb_p :   # Seed-56
+   return_delay_time     :  0    # item name : value
+   alarm_shutdown        :  36
+   CCW_angle_limit       :  4095
+   CW_angle_limit        :  0
+   
+l_arm_thumb_p :   # Seed-56
+   return_delay_time     :  0    # item name : value
+   alarm_shutdown        :  36
+   CCW_angle_limit       :  4095
+   CW_angle_limit        :  0
+   
+r_arm_index_p :   # Seed-56
+   return_delay_time     :  0    # item name : value
+   alarm_shutdown        :  36
+   CCW_angle_limit       :  4095
+   CW_angle_limit        :  0
+   
+l_arm_index_p :   # Seed-56
+   return_delay_time     :  0    # item name : value
+   alarm_shutdown        :  36
+   CCW_angle_limit       :  4095
+   CW_angle_limit        :  0
+   
+r_arm_middle_p :   # Seed-56
+   return_delay_time     :  0    # item name : value
+   alarm_shutdown        :  36
+   CCW_angle_limit       :  4095
+   CW_angle_limit        :  0
+   
+l_arm_middle_p :   # Seed-56
+   return_delay_time     :  0    # item name : value
+   alarm_shutdown        :  36
+   CCW_angle_limit       :  4095
+   CW_angle_limit        :  0
+   
+r_arm_finger45_p :   # Seed-56
+   return_delay_time     :  0    # item name : value
+   alarm_shutdown        :  36
+   CCW_angle_limit       :  4095
+   CW_angle_limit        :  0
+   
+l_arm_finger45_p :   # Seed-56
+   return_delay_time     :  0    # item name : value
+   alarm_shutdown        :  36
+   CCW_angle_limit       :  4095
+   CW_angle_limit        :  0
+   
 r_arm_sh_p1 :   # H54-100-S500-R
-   return_delay_time     :  10    # item name : value
+   return_delay_time     :  0    # item name : value
    operating_mode        :  3
    shutdown              :  58
    homing_offset         :  0
@@ -41,7 +110,7 @@ r_arm_sh_p1 :   # H54-100-S500-R
    velocity_i_gain       : 452
 
 l_arm_sh_p1 :   # H54-100-S500-R
-   return_delay_time     :  10    
+   return_delay_time     :  0    
    operating_mode        :  3     
    shutdown              :  58    
    homing_offset         :  0     
@@ -56,7 +125,7 @@ l_arm_sh_p1 :   # H54-100-S500-R
    velocity_i_gain       : 452
        
 r_arm_sh_r  :   # H54-100-S500-R
-   return_delay_time     :  10    
+   return_delay_time     :  0    
    operating_mode        :  3     
    shutdown              :  58    
    homing_offset         :  0     
@@ -71,7 +140,7 @@ r_arm_sh_r  :   # H54-100-S500-R
    velocity_i_gain       : 452
        
 l_arm_sh_r  :   # H54-100-S500-R
-   return_delay_time     :  10    
+   return_delay_time     :  0    
    operating_mode        :  3     
    shutdown              :  58    
    homing_offset         :  0     
@@ -86,7 +155,7 @@ l_arm_sh_r  :   # H54-100-S500-R
    velocity_i_gain       : 452
        
 r_arm_sh_p2 :   # H54-100-S500-R
-   return_delay_time     :  10    
+   return_delay_time     :  0    
    operating_mode        :  3     
    shutdown              :  58    
    homing_offset         :  0     
@@ -101,7 +170,7 @@ r_arm_sh_p2 :   # H54-100-S500-R
    velocity_i_gain       : 452
        
 l_arm_sh_p2 :   # H54-100-S500-R
-   return_delay_time     :  10    
+   return_delay_time     :  0    
    operating_mode        :  3     
    shutdown              :  58    
    homing_offset         :  0     
@@ -116,7 +185,7 @@ l_arm_sh_p2 :   # H54-100-S500-R
    velocity_i_gain       : 452
        
 r_arm_el_y  :   # H54-100-S500-R
-   return_delay_time     :  10    
+   return_delay_time     :  0    
    operating_mode        :  3     
    shutdown              :  58    
    homing_offset         :  62738   # 45 deg
@@ -131,7 +200,7 @@ r_arm_el_y  :   # H54-100-S500-R
    velocity_i_gain       : 352
        
 l_arm_el_y  :   # H54-100-S500-R
-   return_delay_time     :  10    
+   return_delay_time     :  0    
    operating_mode        :  3     
    shutdown              :  58    
    homing_offset         :  -62738  # -45 deg
@@ -485,7 +554,7 @@ head_p      :   # H42-20-S300-R
    velocity_i_gain       : 40
        
 # r_arm_grip  :   # GRIPPER
-#    return_delay_time     :   10    
+#    return_delay_time     :   0    
 #    operating_mode        :    3     
 #    shutdown              :   48    
 #    #homing_offset        :    0  there is no homming offset in ctrl table of gripper
@@ -500,7 +569,7 @@ head_p      :   # H42-20-S300-R
 #    velocity_i_gain       :   40
        
 # l_arm_grip  :   # GRIPPER
-#    return_delay_time     :   10   
+#    return_delay_time     :   0   
 #    operating_mode        :    3    
 #    shutdown              :   48   
 #    #homing_offset        :    0  there is no homming offset in ctrl table of gripper   

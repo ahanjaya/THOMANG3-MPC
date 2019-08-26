@@ -50,6 +50,8 @@
 namespace robotis_framework
 {
 
+#define DEGREE2RADIAN (M_PI / 180.0)
+
 enum ControllerMode
 {
   MotionModuleMode,
@@ -63,6 +65,8 @@ private:
   boost::thread   gazebo_thread_;
   boost::thread   set_module_thread_;
   boost::mutex    queue_mutex_;
+
+  std::map<std::string, double> seed_init;
 
   bool            init_pose_loaded_;
   bool            is_timer_running_;
@@ -91,6 +95,7 @@ public:
 
   bool              gazebo_mode_;
   std::string       gazebo_robot_name_;
+  std::string       init_seed;
 
   /* bulk read */
   std::map<std::string, dynamixel::GroupBulkRead *>   port_to_bulk_read_;
@@ -121,6 +126,7 @@ public:
 
   bool    initialize(const std::string robot_file_path, const std::string init_file_path);
   void    initializeDevice(const std::string init_file_path);
+  void    initializeSeed(const std::string seed_init_file_path);
   void    process();
 
   void    addMotionModule(MotionModule *module);

@@ -336,6 +336,7 @@ Dynamixel *Robot::getDynamixel(std::string path, int id, std::string port, float
     std::string velocity_d_gain_item_name = "";
     std::string velocity_i_gain_item_name = "";
     std::string velocity_p_gain_item_name = "";
+    // std::string alarm_shutdown_item_name = "";
 
     while (!file.eof())
     {
@@ -417,6 +418,8 @@ Dynamixel *Robot::getDynamixel(std::string path, int id, std::string port, float
           velocity_i_gain_item_name = tokens[1];
         else if (tokens[0] == "velocity_p_gain_item_name")
           velocity_p_gain_item_name = tokens[1];
+        // else if (tokens[0] == "alarm_shutdown_item_name")
+        //   alarm_shutdown_item_name = tokens[1];
       }
       else if (session == SESSION_CONTROL_TABLE)
       {
@@ -477,6 +480,8 @@ Dynamixel *Robot::getDynamixel(std::string path, int id, std::string port, float
       dxl->velocity_i_gain_item_ = dxl->ctrl_table_[velocity_i_gain_item_name];
     if (dxl->ctrl_table_[velocity_p_gain_item_name] != NULL)
       dxl->velocity_p_gain_item_ = dxl->ctrl_table_[velocity_p_gain_item_name];
+    // if (dxl->ctrl_table_[alarm_shutdown_item_name] != NULL)
+    //   dxl->alarm_shutdown_item_ = dxl->ctrl_table_[alarm_shutdown_item_name];
 
     fprintf(stderr, "(%s) [ID:%3d] %14s added. \n", port.c_str(), dxl->id_, dxl->model_name_.c_str());
     //std::cout << "[ID:" << (int)(_dxl->id) << "] " << _dxl->model_name << " added. (" << port << ")" << std::endl;

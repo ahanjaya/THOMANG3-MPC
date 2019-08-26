@@ -73,7 +73,8 @@ public:
   /* ROS Calculation Functions */
   void initPoseTrajGenerateProc();
   void jointTrajGenerateProc();
-  void taskTrajGenerateProc();
+  void taskLeftTrajGenerateProc();
+  void taskRightTrajGenerateProc();
 
   /* ROS Framework Functions */
   void initialize(const int control_cycle_msec, robotis_framework::Robot *robot);
@@ -96,7 +97,9 @@ private:
 
   double          control_cycle_sec_;
   boost::thread   queue_thread_;
-  boost::thread  *traj_generate_tread_;
+  boost::thread  *traj_generate_thread_;
+  boost::thread  *traj_left_generate_thread_;
+  boost::thread  *traj_right_generate_thread_;
 
   std_msgs::String movement_done_msg_;
 
@@ -109,29 +112,48 @@ private:
   Eigen::VectorXd init_joint_position_;
 
   /* trajectory */
-  bool    is_moving_;
-  double  mov_time_;
-  int     cnt_;
-  int     all_time_steps_;
+  bool    is_init_moving_;
+  bool    is_left_moving_;
+  bool    is_right_moving_;
+  double  mov_init_time_;
+  double  mov_left_time_;
+  double  mov_right_time_;
+  int     cnt_init_;
+  int     cnt_left_;
+  int     cnt_right_;
+  int     all_init_time_steps_;
+  int     all_left_time_steps_;
+  int     all_right_time_steps_;
 
   Eigen::MatrixXd goal_joint_tra_;
-  Eigen::MatrixXd goal_task_tra_;
+  Eigen::MatrixXd goal_left_task_tra_;
+  Eigen::MatrixXd goal_right_task_tra_;
 
     /* msgs */
   thormang3_manipulation_module_msgs::JointPose       goal_joint_pose_msg_;
-  thormang3_manipulation_module_msgs::KinematicsPose  goal_kinematics_pose_msg_;
+  thormang3_manipulation_module_msgs::KinematicsPose  goal_kinematics_left_pose_msg_;
+  thormang3_manipulation_module_msgs::KinematicsPose  goal_kinematics_right_pose_msg_;
 
   /* inverse kinematics */
-  bool  ik_solving_;
-  int   ik_id_start_;
-  int   ik_id_end_;
+  bool  ik_left_solving_;
+  bool  ik_right_solving_;
+  int   ik_id_left_start_;
+  int   ik_id_left_end_;
+  int   ik_id_right_start_;
+  int   ik_id_right_end_;
 
-  Eigen::MatrixXd ik_target_position_;
-  Eigen::MatrixXd ik_start_rotation_;
-  Eigen::MatrixXd ik_target_rotation_;
+  Eigen::MatrixXd ik_target_left_position_;
+  Eigen::MatrixXd ik_start_left_rotation_;
+  Eigen::MatrixXd ik_target_left_rotation_;
+  Eigen::MatrixXd ik_target_right_position_;
+  Eigen::MatrixXd ik_start_right_rotation_;
+  Eigen::MatrixXd ik_target_right_rotation_;
+  
   Eigen::MatrixXd ik_weight_;
 
-  void setInverseKinematics(int cnt, Eigen::MatrixXd start_rotation);
+  void setInverseKinematics(int cnt, Eigen::MatrixXd start_rotation, int all_time_steps, Eigen::MatrixXd goal_task_tra_,
+                            Eigen::MatrixXd &ik_target_position_, Eigen::MatrixXd &ik_target_rotation_, 
+                            thormang3_manipulation_module_msgs::KinematicsPose  goal_kinematics_pose_msg_);
 
   std::map<std::string, int> joint_name_to_id_;
 };
