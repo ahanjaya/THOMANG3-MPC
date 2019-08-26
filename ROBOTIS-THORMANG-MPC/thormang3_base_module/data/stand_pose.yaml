@@ -1,0 +1,71 @@
+# time parameter
+
+mov_time : 1.0		  # movement time
+
+via_num : 0	        # via-point number
+via_time : [ 2.0 ]  # via-point time
+
+####################################
+# Additional Seed Robotics
+
+# via-point pose [deg]
+
+via_pose :
+  1 : [ -66.95 ]       # r_arm_sh_p1
+  2 : [ 66.95 ]        # l_arm_sh_p1
+  3 : [ -60.28 ]       # r_arm_sh_r
+  4 : [ 60.28 ]        # l_arm_sh_r
+  5 : [ 10.71 ]        # r_arm_sh_p2
+  6 : [ -10.71 ]       # l_arm_sh_p2
+  7 : [ -34.44 ]       # r_arm_el_y
+  8 : [ 34.44 ]        # l_arm_el_y
+  9 : [ -180.0 ]          # r_arm_wr_r
+  10 : [ 180.0 ]         # l_arm_wr_r
+  11 : [ 0.0 ]         # r_arm_wr_y
+  12 : [ 0.0 ]         # l_arm_wr_y
+  13 : [ 0.0 ]         # r_arm_wr_p
+  14 : [ 0.0 ]         # l_arm_wr_p
+  27 : [ 0.0 ]         # torso_y
+  28 : [ 0.0 ]         # head_y
+  29 : [ 0.0 ]         # head_p
+  # 103 : [ 0.0 ]       # r_arm_thumb_y
+  # 104 : [ 0.0 ]        # l_arm_thumb_y
+  # 105 : [ -180.0 ]    # r_arm_thumb_p
+  # 106 : [ -180.0 ]     # l_arm_thumb_p
+  # 107 : [ -180.0 ]     # r_arm_index_p
+  # 108 : [ -180.0 ]     # l_arm_index_p
+  # 109 : [ -180.0 ]     # r_arm_middle_p
+  # 110 : [ -180.0 ]     # l_arm_middle_p
+  # 111 : [ -180.0 ]     # r_arm_finger45_p
+  # 112 : [ -180.0 ]     # l_arm_finger45_p
+
+# target pose [deg]
+
+tar_pose :
+  1  :  -25.0 	    # r_arm_sh_p1
+  2  :   25.0 	    # l_arm_sh_p1
+  3  :  -75.0 	    # r_arm_sh_r
+  4  :   75.0 	    # l_arm_sh_r
+  5  :  -5.0 		    # r_arm_sh_p2
+  6  :   5.0 		    # l_arm_sh_p2
+  7  :  20.0 		    # r_arm_el_y
+  8  : -20.0 		    # l_arm_el_y
+  9  : 0.0          # r_arm_wr_r
+  10 : 0.0          # l_arm_wr_r
+  11 : 0.0          # r_arm_wr_y
+  12 : 0.0          # l_arm_wr_y
+  13 : 0.0          # r_arm_wr_p
+  14 : 0.0          # l_arm_wr_p
+  27 : 0.0		      # torso_y
+  28 : 0.0 		      # head_y
+  29 : 0.0 		      # head_p
+  # 103 : 0.0        # r_arm_thumb_y
+  # 104 : 0.0         # l_arm_thumb_y
+  # 105 : -180.0     # r_arm_thumb_p
+  # 106 : -180.0      # l_arm_thumb_p
+  # 107 : -180.0      # r_arm_index_p
+  # 108 : -180.0      # l_arm_index_p
+  # 109 : -180.0      # r_arm_middle_p
+  # 110 : -180.0      # l_arm_middle_p
+  # 111 : -180.0      # r_arm_finger45_p
+  # 112 : -180.0      # l_arm_finger45_p

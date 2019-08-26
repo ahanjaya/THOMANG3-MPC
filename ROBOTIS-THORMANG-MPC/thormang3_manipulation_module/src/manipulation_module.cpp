@@ -29,7 +29,7 @@ ManipulationModule::ManipulationModule()
   : control_cycle_sec_(0.008),
     is_moving_(false),
     ik_solving_(false),
-    arm_angle_display_(false)
+    arm_angle_display_(true)
 {
   enable_       = false;
   module_name_  = "manipulation_module";
@@ -52,6 +52,18 @@ ManipulationModule::ManipulationModule()
   result_["l_arm_wr_p"]   = new robotis_framework::DynamixelState();
   result_["torso_y"]      = new robotis_framework::DynamixelState();
 
+  /* seed robotics */
+  // // result_["r_arm_thumb_y"]   = new robotis_framework::DynamixelState();
+  // result_["l_arm_thumb_y"]   = new robotis_framework::DynamixelState();
+  // // result_["r_arm_thumb_p"]   = new robotis_framework::DynamixelState();
+  // result_["l_arm_thumb_p"]   = new robotis_framework::DynamixelState();
+  // result_["r_arm_index_p"]   = new robotis_framework::DynamixelState();
+  // result_["l_arm_index_p"]   = new robotis_framework::DynamixelState();
+  // result_["r_arm_middle_p"]   = new robotis_framework::DynamixelState();
+  // result_["l_arm_middle_p"]   = new robotis_framework::DynamixelState();  
+  // result_["r_arm_finger45_p"] = new robotis_framework::DynamixelState();
+  // result_["l_arm_finger45_p"] = new robotis_framework::DynamixelState();
+
   /* arm */
   joint_name_to_id_["r_arm_sh_p1"] = 1;
   joint_name_to_id_["l_arm_sh_p1"] = 2;
@@ -72,6 +84,18 @@ ManipulationModule::ManipulationModule()
   /* etc */
   joint_name_to_id_["r_arm_end"]   = 35;
   joint_name_to_id_["l_arm_end"]   = 34;
+
+  /* seed robotics */
+  // // joint_name_to_id_["r_arm_thumb_y"]    = 103;
+  // joint_name_to_id_["l_arm_thumb_y"]    = 104;
+  // // joint_name_to_id_["r_arm_thumb_p"]    = 105;
+  // joint_name_to_id_["l_arm_thumb_p"]    = 106;
+  // joint_name_to_id_["r_arm_index_p"]    = 107;
+  // joint_name_to_id_["l_arm_index_p"]    = 108;
+  // joint_name_to_id_["r_arm_middle_p"]   = 109;
+  // joint_name_to_id_["l_arm_middle_p"]   = 110;
+  // joint_name_to_id_["r_arm_finger45_p"] = 111;
+  // joint_name_to_id_["l_arm_finger45_p"] = 112;
 
   /* parameter */
   present_joint_position_   = Eigen::VectorXd::Zero(MAX_JOINT_ID+1);
@@ -399,7 +423,7 @@ void ManipulationModule::jointTrajGenerateProc()
   cnt_        = 0;
   is_moving_  = true;
 
-  ROS_INFO("[start] send trajectory");
+  ROS_INFO("[start] jointTrajGenerateProc send trajectory");
 }
 
 void ManipulationModule::taskTrajGenerateProc()
@@ -454,7 +478,7 @@ void ManipulationModule::taskTrajGenerateProc()
   is_moving_    = true;
   ik_solving_   = true;
 
-  ROS_INFO("[start] send trajectory");
+  ROS_INFO("[start] taskTrajGenerateProc send trajectory");
 }
 
 void ManipulationModule::setInverseKinematics(int cnt, Eigen::MatrixXd start_rotation)
@@ -488,6 +512,8 @@ void ManipulationModule::process(std::map<std::string, robotis_framework::Dynami
        state_iter != result_.end(); state_iter++)
   {
     std::string joint_name = state_iter->first;
+
+    // ROS_INFO_STREAM(joint_name);
 
     robotis_framework::Dynamixel *dxl = NULL;
     std::map<std::string, robotis_framework::Dynamixel*>::iterator dxl_it = dxls.find(joint_name);
@@ -537,7 +563,10 @@ void ManipulationModule::process(std::map<std::string, robotis_framework::Dynami
       if (ik_success == true)
       {
         for (int id = 1; id <= MAX_JOINT_ID; id++)
+        {
           goal_joint_position_(id) = robotis_->thormang3_link_data_[id]->joint_angle_;
+          //   ROS_INFO_STREAM("id: " << id << " angle: " << robotis_->thormang3_link_data_[id]->joint_angle_);
+        }
       }
       else
       {
@@ -577,7 +606,7 @@ void ManipulationModule::process(std::map<std::string, robotis_framework::Dynami
   {
     if (cnt_ >= all_time_steps_)
     {
-      ROS_INFO("[end] send trajectory");
+      ROS_INFO("[end] success send trajectory");
 
       publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO, "End Trajectory");
 
@@ -598,13 +627,29 @@ void ManipulationModule::process(std::map<std::string, robotis_framework::Dynami
         ROS_INFO("l_arm_wr_y  : %f", goal_joint_position_(joint_name_to_id_["l_arm_wr_y"])  * RADIAN2DEGREE );
         ROS_INFO("l_arm_wr_p  : %f", goal_joint_position_(joint_name_to_id_["l_arm_wr_p"])  * RADIAN2DEGREE );
 
-        ROS_INFO("r_arm_sh_p1 : %f", goal_joint_position_(joint_name_to_id_["r_arm_sh_p1"]) * RADIAN2DEGREE );
-        ROS_INFO("r_arm_sh_r  : %f", goal_joint_position_(joint_name_to_id_["r_arm_sh_r"])  * RADIAN2DEGREE );
-        ROS_INFO("r_arm_sh_p2 : %f", goal_joint_position_(joint_name_to_id_["r_arm_sh_p2"]) * RADIAN2DEGREE );
-        ROS_INFO("r_arm_el_y  : %f", goal_joint_position_(joint_name_to_id_["r_arm_el_y"])  * RADIAN2DEGREE );
-        ROS_INFO("r_arm_wr_r  : %f", goal_joint_position_(joint_name_to_id_["r_arm_wr_r"])  * RADIAN2DEGREE );
-        ROS_INFO("r_arm_wr_y  : %f", goal_joint_position_(joint_name_to_id_["r_arm_wr_y"])  * RADIAN2DEGREE );
-        ROS_INFO("r_arm_wr_p  : %f", goal_joint_position_(joint_name_to_id_["r_arm_wr_p"])  * RADIAN2DEGREE );
+        ROS_INFO("rad l_arm_wr_r  : %f", goal_joint_position_(joint_name_to_id_["l_arm_wr_r"]) );
+        ROS_INFO("rad l_arm_wr_y  : %f", goal_joint_position_(joint_name_to_id_["l_arm_wr_y"]) );
+        ROS_INFO("rad l_arm_wr_p  : %f", goal_joint_position_(joint_name_to_id_["l_arm_wr_p"]) );
+
+        // ROS_INFO("l_arm_thumb_y  : %f", goal_joint_position_(joint_name_to_id_["l_arm_thumb_y"])  * RADIAN2DEGREE );
+        // ROS_INFO("l_arm_thumb_p  : %f", goal_joint_position_(joint_name_to_id_["l_arm_thumb_p"])  * RADIAN2DEGREE );
+        // ROS_INFO("l_arm_index_p  : %f", goal_joint_position_(joint_name_to_id_["l_arm_index_p"])  * RADIAN2DEGREE );
+        // ROS_INFO("l_arm_middle_p  : %f", goal_joint_position_(joint_name_to_id_["l_arm_middle_p"])  * RADIAN2DEGREE );
+        // ROS_INFO("l_arm_finger45_p  : %f", goal_joint_position_(joint_name_to_id_["l_arm_finger45_p"])  * RADIAN2DEGREE );
+
+        // ROS_INFO("r_arm_sh_p1 : %f", goal_joint_position_(joint_name_to_id_["r_arm_sh_p1"]) * RADIAN2DEGREE );
+        // ROS_INFO("r_arm_sh_r  : %f", goal_joint_position_(joint_name_to_id_["r_arm_sh_r"])  * RADIAN2DEGREE );
+        // ROS_INFO("r_arm_sh_p2 : %f", goal_joint_position_(joint_name_to_id_["r_arm_sh_p2"]) * RADIAN2DEGREE );
+        // ROS_INFO("r_arm_el_y  : %f", goal_joint_position_(joint_name_to_id_["r_arm_el_y"])  * RADIAN2DEGREE );
+        // ROS_INFO("r_arm_wr_r  : %f", goal_joint_position_(joint_name_to_id_["r_arm_wr_r"])  * RADIAN2DEGREE );
+        // ROS_INFO("r_arm_wr_y  : %f", goal_joint_position_(joint_name_to_id_["r_arm_wr_y"])  * RADIAN2DEGREE );
+        // ROS_INFO("r_arm_wr_p  : %f", goal_joint_position_(joint_name_to_id_["r_arm_wr_p"])  * RADIAN2DEGREE );
+        // // ROS_INFO("r_arm_thumb_y  : %f", goal_joint_position_(joint_name_to_id_["r_arm_thumb_y"])  * RADIAN2DEGREE );
+        // // ROS_INFO("r_arm_thumb_p  : %f", goal_joint_position_(joint_name_to_id_["r_arm_thumb_p"])  * RADIAN2DEGREE );
+        // ROS_INFO("r_arm_index_p  : %f", goal_joint_position_(joint_name_to_id_["r_arm_index_p"])  * RADIAN2DEGREE );
+        // ROS_INFO("r_arm_middle_p  : %f", goal_joint_position_(joint_name_to_id_["r_arm_middle_p"])  * RADIAN2DEGREE );
+        // ROS_INFO("r_arm_finger45_p  : %f", goal_joint_position_(joint_name_to_id_["r_arm_finger45_p"])  * RADIAN2DEGREE );
+
       }
 
     }

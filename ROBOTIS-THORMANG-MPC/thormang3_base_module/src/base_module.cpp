@@ -56,27 +56,38 @@ BaseModule::BaseModule()
   result_["r_arm_wr_p"]   = new robotis_framework::DynamixelState();
   result_["l_arm_wr_p"]   = new robotis_framework::DynamixelState();
 
+  /* seed robotics */
+  // result_["r_arm_thumb_y"]   = new robotis_framework::DynamixelState();
+  result_["l_arm_thumb_y"]   = new robotis_framework::DynamixelState();
+  // result_["r_arm_thumb_p"]   = new robotis_framework::DynamixelState();
+  result_["l_arm_thumb_p"]   = new robotis_framework::DynamixelState();
+  result_["r_arm_index_p"]   = new robotis_framework::DynamixelState();
+  result_["l_arm_index_p"]   = new robotis_framework::DynamixelState();
+  result_["r_arm_middle_p"]   = new robotis_framework::DynamixelState();
+  result_["l_arm_middle_p"]   = new robotis_framework::DynamixelState();  
+  result_["r_arm_finger45_p"] = new robotis_framework::DynamixelState();
+  result_["l_arm_finger45_p"] = new robotis_framework::DynamixelState();
+
   /* gripper */
-  result_["r_arm_grip"]   = new robotis_framework::DynamixelState();
-  result_["l_arm_grip"]   = new robotis_framework::DynamixelState();
+  // result_["r_arm_grip"]   = new robotis_framework::DynamixelState();
+  // result_["l_arm_grip"]   = new robotis_framework::DynamixelState();
 
   /* body */
   result_["torso_y"]      = new robotis_framework::DynamixelState();
 
   /* leg */
-  result_["r_leg_hip_y"]  = new robotis_framework::DynamixelState();
-  result_["r_leg_hip_r"]  = new robotis_framework::DynamixelState();
-  result_["r_leg_hip_p"]  = new robotis_framework::DynamixelState();
-  result_["r_leg_kn_p"]   = new robotis_framework::DynamixelState();
-  result_["r_leg_an_p"]   = new robotis_framework::DynamixelState();
-  result_["r_leg_an_r"]   = new robotis_framework::DynamixelState();
-
-  result_["l_leg_hip_y"]  = new robotis_framework::DynamixelState();
-  result_["l_leg_hip_r"]  = new robotis_framework::DynamixelState();
-  result_["l_leg_hip_p"]  = new robotis_framework::DynamixelState();
-  result_["l_leg_kn_p"]   = new robotis_framework::DynamixelState();
-  result_["l_leg_an_p"]   = new robotis_framework::DynamixelState();
-  result_["l_leg_an_r"]   = new robotis_framework::DynamixelState();
+  // result_["r_leg_hip_y"]  = new robotis_framework::DynamixelState();
+  // result_["r_leg_hip_r"]  = new robotis_framework::DynamixelState();
+  // result_["r_leg_hip_p"]  = new robotis_framework::DynamixelState();
+  // result_["r_leg_kn_p"]   = new robotis_framework::DynamixelState();
+  // result_["r_leg_an_p"]   = new robotis_framework::DynamixelState();
+  // result_["r_leg_an_r"]   = new robotis_framework::DynamixelState();
+  // result_["l_leg_hip_y"]  = new robotis_framework::DynamixelState();
+  // result_["l_leg_hip_r"]  = new robotis_framework::DynamixelState();
+  // result_["l_leg_hip_p"]  = new robotis_framework::DynamixelState();
+  // result_["l_leg_kn_p"]   = new robotis_framework::DynamixelState();
+  // result_["l_leg_an_p"]   = new robotis_framework::DynamixelState();
+  // result_["l_leg_an_r"]   = new robotis_framework::DynamixelState();
 
   /* head */
   result_["head_y"]       = new robotis_framework::DynamixelState();
@@ -93,24 +104,36 @@ BaseModule::BaseModule()
   joint_name_to_id_["l_arm_el_y"]   = 8;
   joint_name_to_id_["r_arm_wr_r"]   = 9;
   joint_name_to_id_["l_arm_wr_r"]   = 10;
-  joint_name_to_id_["r_arm_wr_y"]   = 11;
+  joint_name_to_id_["r_arm_wr_y"]   = 11; 
   joint_name_to_id_["l_arm_wr_y"]   = 12;
   joint_name_to_id_["r_arm_wr_p"]   = 13;
   joint_name_to_id_["l_arm_wr_p"]   = 14;
 
+  /* seed robotics */
+  // joint_name_to_id_["r_arm_thumb_y"]    = 103;
+  joint_name_to_id_["l_arm_thumb_y"]    = 104;
+  // joint_name_to_id_["r_arm_thumb_p"]    = 105;
+  joint_name_to_id_["l_arm_thumb_p"]    = 106;
+  joint_name_to_id_["r_arm_index_p"]    = 107;
+  joint_name_to_id_["l_arm_index_p"]    = 108;
+  joint_name_to_id_["r_arm_middle_p"]   = 109;
+  joint_name_to_id_["l_arm_middle_p"]   = 110;
+  joint_name_to_id_["r_arm_finger45_p"] = 111;
+  joint_name_to_id_["l_arm_finger45_p"] = 112;
+
   /* leg */
-  joint_name_to_id_["r_leg_hip_y"]  = 15;
-  joint_name_to_id_["l_leg_hip_y"]  = 16;
-  joint_name_to_id_["r_leg_hip_r"]  = 17;
-  joint_name_to_id_["l_leg_hip_r"]  = 18;
-  joint_name_to_id_["r_leg_hip_p"]  = 19;
-  joint_name_to_id_["l_leg_hip_p"]  = 20;
-  joint_name_to_id_["r_leg_kn_p"]   = 21;
-  joint_name_to_id_["l_leg_kn_p"]   = 22;
-  joint_name_to_id_["r_leg_an_p"]   = 23;
-  joint_name_to_id_["l_leg_an_p"]   = 24;
-  joint_name_to_id_["r_leg_an_r"]   = 25;
-  joint_name_to_id_["l_leg_an_r"]   = 26;
+  // joint_name_to_id_["r_leg_hip_y"]  = 15;
+  // joint_name_to_id_["l_leg_hip_y"]  = 16;
+  // joint_name_to_id_["r_leg_hip_r"]  = 17;
+  // joint_name_to_id_["l_leg_hip_r"]  = 18;
+  // joint_name_to_id_["r_leg_hip_p"]  = 19;
+  // joint_name_to_id_["l_leg_hip_p"]  = 20;
+  // joint_name_to_id_["r_leg_kn_p"]   = 21;
+  // joint_name_to_id_["l_leg_kn_p"]   = 22;
+  // joint_name_to_id_["r_leg_an_p"]   = 23;
+  // joint_name_to_id_["l_leg_an_p"]   = 24;
+  // joint_name_to_id_["r_leg_an_r"]   = 25;
+  // joint_name_to_id_["l_leg_an_r"]   = 26;
 
   /* body */
   joint_name_to_id_["torso_y"]      = 27;
@@ -120,11 +143,11 @@ BaseModule::BaseModule()
   joint_name_to_id_["head_p"]       = 29;
 
   /* gripper */
-  joint_name_to_id_["r_arm_grip"]   = 31;
-  joint_name_to_id_["l_arm_grip"]   = 30;
+  // joint_name_to_id_["r_arm_grip"]   = 31;
+  // joint_name_to_id_["l_arm_grip"]   = 30;
 
   base_module_state_  = new BaseModuleState();
-  joint_state_    = new BaseJointState();
+  joint_state_        = new BaseJointState();
 }
 
 BaseModule::~BaseModule()
@@ -153,7 +176,8 @@ void BaseModule::parseIniPoseData(const std::string &path)
   {
     // load yaml
     doc = YAML::LoadFile(path.c_str());
-  } catch (const std::exception& e)
+  } 
+  catch (const std::exception& e)
   {
     ROS_ERROR("Fail to load yaml file.");
     return;
@@ -240,7 +264,7 @@ void BaseModule::initPoseMsgCallback(const std_msgs::String::ConstPtr& msg)
   if (base_module_state_->is_moving_ == false)
   {
     if (msg->data == "ini_pose")
-    {
+    {    
       // set module of all joints -> this module
       setCtrlModule(module_name_);
 
@@ -255,6 +279,23 @@ void BaseModule::initPoseMsgCallback(const std_msgs::String::ConstPtr& msg)
       // generate trajectory
       tra_gene_tread_ = boost::thread(boost::bind(&BaseModule::initPoseTrajGenerateProc, this));
     }
+    else if (msg->data == "stand_pose")
+    {
+      // set module of all joints -> this module
+      setCtrlModule(module_name_);
+
+      // wait to change module and to get goal position for init
+      while (enable_ == false || has_goal_joints_ == false)
+        usleep(8 * 1000);
+
+      // parse stand pose
+      std::string stand_pose_path = ros::package::getPath("thormang3_base_module") + "/data/stand_pose.yaml";
+      parseIniPoseData(stand_pose_path);
+
+      // generate trajectory
+      tra_gene_tread_ = boost::thread(boost::bind(&BaseModule::initPoseTrajGenerateProc, this));
+    }
+    mode_ = msg->data;
   }
   else
     ROS_INFO("previous task is alive");
@@ -291,7 +332,7 @@ void BaseModule::initPoseTrajGenerateProc()
     base_module_state_->calc_joint_tra_.block(0, id, base_module_state_->all_time_steps_, 1) = tra;
   }
 
-  base_module_state_->is_moving_ = true;
+  base_module_state_->is_moving_ = true; //**
   base_module_state_->cnt_ = 0;
   ROS_INFO("[start] send trajectory");
 }
@@ -412,10 +453,18 @@ void BaseModule::process(std::map<std::string, robotis_framework::Dynamixel *> d
   if (base_module_state_->is_moving_ == true)
   {
     if (base_module_state_->cnt_ == 1)
-      publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO, "Start Init Pose");
+    
+      // if (strcmp(mode_.c_str(), "stand_pose") == 0)
+      if ((mode_.compare("stand_pose")) == 0) 
+        publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO, "Start Stand Pose");
+      else
+        publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO, "Start Init Pose");
 
     for (int id = 1; id <= MAX_JOINT_ID; id++)
+    {
+      // ROS_INFO("id : %d, Max = %d", id, MAX_JOINT_ID);
       joint_state_->goal_joint_state_[id].position_ = base_module_state_->calc_joint_tra_(base_module_state_->cnt_, id);
+    }      
 
     base_module_state_->cnt_++;
   }
@@ -436,7 +485,11 @@ void BaseModule::process(std::map<std::string, robotis_framework::Dynamixel *> d
   {
     ROS_INFO("[end] send trajectory");
 
-    publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO, "Finish Init Pose");
+    if ((mode_.compare("stand_pose")) == 0) 
+      publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO, "Finish Stand Pose");
+    else
+      publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO, "Finish Init Pose");
+
     publishDoneMsg("base_init");
 
     base_module_state_->is_moving_ = false;

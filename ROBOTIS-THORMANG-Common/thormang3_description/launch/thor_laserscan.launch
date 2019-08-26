@@ -5,8 +5,8 @@
     <param name="frame_id" value="lidar_link" />
     <param name="ip_address" value="10.17.3.31" />
     <param name="publish_multiecho" value="false" />
-    <!-- <param name="angle_min" value="-1.5" /> -->
-    <!-- <param name="angle_max" value="1.5" /> -->
+    <param name="angle_min" value="-0.785398" />
+    <param name="angle_max" value="0.785398" />
     <remap from="/scan" to="/robotis/sensor/scan" />
   </node>
 </launch>

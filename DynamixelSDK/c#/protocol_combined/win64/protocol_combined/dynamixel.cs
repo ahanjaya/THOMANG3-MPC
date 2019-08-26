@@ -23,7 +23,7 @@ namespace dynamixel_sdk
 {
   class dynamixel
   {
-    const string dll_path = "../../../../../../../c/build/win64/output/dxl_x64_c.dll";
+    const string dll_path = "../../../../../../../../c/build/win64/output/dxl_x64_c.dll";
 
     #region PortHandler
     [DllImport(dll_path)]
@@ -46,13 +46,18 @@ namespace dynamixel_sdk
     [DllImport(dll_path)]
     public static extern int    getBaudRate         (int port_num);
 
+    #ifdef __linux__
     [DllImport(dll_path)]
-    public static extern int    readPort            (int port_num, byte[] packet, int length);
-    [DllImport(dll_path)]
-    public static extern int    writePort           (int port_num, byte[] packet, int length);
+    public static extern int    getBytesAvailable   (int port_num);
+    #endif
 
     [DllImport(dll_path)]
-    public static extern void   setPacketTimeout    (int port_num, UInt16 packet_length);
+    public static extern int    readPort            (int port_num, uint8_t *packet, int length);
+    [DllImport(dll_path)]
+    public static extern int    writePort           (int port_num, uint8_t *packet, int length);
+
+    [DllImport(dll_path)]
+    public static extern void   setPacketTimeout    (int port_num, uint16_t packet_length);
     [DllImport(dll_path)]
     public static extern void   setPacketTimeoutMSec(int port_num, double msec);
     [DllImport(dll_path)]
@@ -63,11 +68,12 @@ namespace dynamixel_sdk
     [DllImport(dll_path)]
     public static extern void   packetHandler       ();
 
+
     [DllImport(dll_path)]
     public static extern IntPtr getTxRxResult       (int protocol_version, int result);
     [DllImport(dll_path)]
     public static extern IntPtr getRxPacketError    (int protocol_version, byte error);
-
+    
     [DllImport(dll_path)]
     public static extern int    getLastTxRxResult   (int port_num, int protocol_version);
     [DllImport(dll_path)]
