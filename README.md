@@ -1,4 +1,4 @@
-# ROBOTIS THORMANG3 MPC
+# ROBOTIS THORMANG3 OPC
 ![](https://github.com/ROBOTIS-GIT/emanual/blob/master/assets/images/platform/thormang3/thormang3.png)
 
 ## ROBOTIS e-Manual for ROBOTIS THORMANG3
