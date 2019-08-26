@@ -328,10 +328,17 @@ void BaseModule::initPoseTrajGenerateProc()
       Eigen::MatrixXd d_via_value = base_module_state_->joint_via_dpose_.col(id);
       Eigen::MatrixXd dd_via_value = base_module_state_->joint_via_ddpose_.col(id);
 
+      // ROS_INFO_STREAM("via id: " << id << " " << base_module_state_->joint_via_pose_.col(id));
+
       tra = robotis_framework::calcMinimumJerkTraWithViaPoints(base_module_state_->via_num_, ini_value, 0.0, 0.0,
                                                                via_value, d_via_value, dd_via_value, tar_value,
                                                                0.0, 0.0, base_module_state_->smp_time_,
                                                                base_module_state_->via_time_, base_module_state_->mov_time_);
+
+      // tra = robotis_framework::calcMinimumJerkTraWithViaPointsPosition(base_module_state_->via_num_, ini_value, 0.0, 0.0,
+      //                                                           via_value, tar_value,
+      //                                                           0.0, 0.0, base_module_state_->smp_time_,
+      //                                                           base_module_state_->via_time_, base_module_state_->mov_time_);
     }
 
     base_module_state_->calc_joint_tra_.block(0, id, base_module_state_->all_time_steps_, 1) = tra;

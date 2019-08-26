@@ -32,6 +32,8 @@
 #include <std_msgs/Float64.h>
 #include <std_msgs/String.h>
 #include <geometry_msgs/Pose.h>
+#include <geometry_msgs/PoseArray.h>
+
 #include <boost/thread.hpp>
 #include <eigen3/Eigen/Eigen>
 #include <yaml-cpp/yaml.h>
@@ -41,6 +43,7 @@
 
 #include "thormang3_manipulation_module_msgs/JointPose.h"
 #include "thormang3_manipulation_module_msgs/KinematicsPose.h"
+#include "thormang3_manipulation_module_msgs/KinematicsArrayPose.h"
 #include "thormang3_manipulation_module_msgs/GetJointPose.h"
 #include "thormang3_manipulation_module_msgs/GetKinematicsPose.h"
 
@@ -64,6 +67,7 @@ public:
   void initPoseMsgCallback(const std_msgs::String::ConstPtr& msg);
   void jointPoseMsgCallback(const thormang3_manipulation_module_msgs::JointPose::ConstPtr& msg);
   void kinematicsPoseMsgCallback(const thormang3_manipulation_module_msgs::KinematicsPose::ConstPtr& msg);
+  void kinematicsPoseArrMsgCallback(const thormang3_manipulation_module_msgs::KinematicsArrayPose::ConstPtr& msg);
 
   bool getJointPoseCallback(thormang3_manipulation_module_msgs::GetJointPose::Request &req,
                             thormang3_manipulation_module_msgs::GetJointPose::Response &res);
@@ -75,6 +79,8 @@ public:
   void jointTrajGenerateProc();
   void taskLeftTrajGenerateProc();
   void taskRightTrajGenerateProc();
+  void taskLeftArrTrajGenerateProc();
+  void taskRightArrTrajGenerateProc();
 
   /* ROS Framework Functions */
   void initialize(const int control_cycle_msec, robotis_framework::Robot *robot);
@@ -102,6 +108,8 @@ private:
   boost::thread  *traj_right_generate_thread_;
 
   std_msgs::String movement_done_msg_;
+  geometry_msgs::Pose left_sub_pose_msg_;
+  geometry_msgs::Pose right_sub_pose_msg_;
 
   ros::Publisher  status_msg_pub_;
   ros::Publisher  movement_done_pub_;
@@ -115,6 +123,15 @@ private:
   bool    is_init_moving_;
   bool    is_left_moving_;
   bool    is_right_moving_;
+  bool    is_left_arr_override_;
+  bool    is_right_arr_override_;
+
+  bool    flag_move_left;
+  bool    flag_move_right;
+
+  bool    ik_failed_left;
+  bool    ik_failed_right;
+
   double  mov_init_time_;
   double  mov_left_time_;
   double  mov_right_time_;
@@ -129,10 +146,13 @@ private:
   Eigen::MatrixXd goal_left_task_tra_;
   Eigen::MatrixXd goal_right_task_tra_;
 
-    /* msgs */
+  /* msgs */
   thormang3_manipulation_module_msgs::JointPose       goal_joint_pose_msg_;
   thormang3_manipulation_module_msgs::KinematicsPose  goal_kinematics_left_pose_msg_;
   thormang3_manipulation_module_msgs::KinematicsPose  goal_kinematics_right_pose_msg_;
+
+  thormang3_manipulation_module_msgs::KinematicsArrayPose  goal_kinematics_left_arr_pose_msg_;
+  thormang3_manipulation_module_msgs::KinematicsArrayPose  goal_kinematics_right_arr_pose_msg_;
 
   /* inverse kinematics */
   bool  ik_left_solving_;
@@ -154,6 +174,10 @@ private:
   void setInverseKinematics(int cnt, Eigen::MatrixXd start_rotation, int all_time_steps, Eigen::MatrixXd goal_task_tra_,
                             Eigen::MatrixXd &ik_target_position_, Eigen::MatrixXd &ik_target_rotation_, 
                             thormang3_manipulation_module_msgs::KinematicsPose  goal_kinematics_pose_msg_);
+
+  void setInverseKinematicsArr(int cnt, Eigen::MatrixXd start_rotation, int all_time_steps, Eigen::MatrixXd goal_task_tra_,
+                            Eigen::MatrixXd &ik_target_position_, Eigen::MatrixXd &ik_target_rotation_, 
+                            geometry_msgs::Pose sub_pose_msg_);
 
   std::map<std::string, int> joint_name_to_id_;
 };
