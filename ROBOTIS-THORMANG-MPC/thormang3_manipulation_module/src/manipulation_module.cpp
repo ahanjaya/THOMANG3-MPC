@@ -217,6 +217,24 @@ void ManipulationModule::initPoseMsgCallback(const std_msgs::String::ConstPtr& m
       traj_generate_thread_ = new boost::thread(boost::bind(&ManipulationModule::initPoseTrajGenerateProc, this));
       delete traj_generate_thread_;
     }
+    else if (msg->data == "align_keyboard_pose")
+    {
+      // parse initial pose
+      std::string ini_pose_path = ros::package::getPath("thormang3_manipulation_module") + "/config/align_keyboard_pose.yaml";
+      parseIniPoseData(ini_pose_path);
+
+      traj_generate_thread_ = new boost::thread(boost::bind(&ManipulationModule::initPoseTrajGenerateProc, this));
+      delete traj_generate_thread_;
+    }
+    else if (msg->data == "typing_pose")
+    {
+      // parse initial pose
+      std::string ini_pose_path = ros::package::getPath("thormang3_manipulation_module") + "/config/typing_pose.yaml";
+      parseIniPoseData(ini_pose_path);
+
+      traj_generate_thread_ = new boost::thread(boost::bind(&ManipulationModule::initPoseTrajGenerateProc, this));
+      delete traj_generate_thread_;
+    }
   }
   else
   {
@@ -892,7 +910,7 @@ void ManipulationModule::process(std::map<std::string, robotis_framework::Dynami
       if (!is_right_arr_override_)
       {
         ROS_INFO("[end] success send right trajectory");
-        publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO, "End right Arm Trajectory");
+        publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO, "End Right Arm Trajectory");
       }        
 
       is_right_moving_  = false;

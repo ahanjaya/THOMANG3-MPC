@@ -177,12 +177,10 @@ void RobotisController::initializeSyncWrite()
     else  // Seed Robotics
     {
       // ROS_INFO_STREAM(dxl->port_name_.c_str());
+      // ROS_INFO_STREAM("Joint Name : " << joint_name << " value: "<< seed_init[joint_name]);
 
       uint8_t   sync_write_data[4];
       uint32_t read_data;
-     
-      // ROS_INFO_STREAM("Joint Name : " << joint_name << " value: "<< seed_init[joint_name]);
-
       read_data = dxl->convertRadian2Value(seed_init[joint_name]);
       sync_write_data[0] = DXL_LOBYTE(DXL_LOWORD(read_data));
       sync_write_data[1] = DXL_HIBYTE(DXL_LOWORD(read_data));

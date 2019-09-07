@@ -74,7 +74,6 @@ void HeadControlModule::initialize(const int control_cycle_msec, robotis_framewo
   /* publish topics */
   moving_head_pub_ = ros_node.advertise<std_msgs::String>("/robotis/sensor/move_lidar", 0);
   status_msg_pub_ = ros_node.advertise<robotis_controller_msgs::StatusMsg>("/robotis/status", 0);
-
   movement_done_pub_ = ros_node.advertise<std_msgs::String>("/robotis/movement_done", 1);
 }
 
@@ -146,6 +145,8 @@ void HeadControlModule::get3DLidarRangeCallback(const std_msgs::Float64::ConstPt
     is_direct_control_ = false;
     scan_range_ = msg->data;
     double start_angle = current_position_.coeffRef(0, using_joint_name_["head_p"]) - scan_range_;
+    // ROS_INFO_STREAM("Start Lidar Rad: " << start_angle);
+    // ROS_INFO_STREAM("Start Lidar Deg: " << start_angle*RADIAN2DEGREE);
     beforeMoveLidar(start_angle);
 
     publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO, "Start head joint in order to make pointcloud");
@@ -405,6 +406,8 @@ void HeadControlModule::finishMoving()
           (scan_range_ == 0) ?
               SCAN_END_ANGLE : current_position_.coeffRef(0, using_joint_name_["head_p"]) + scan_range_ * 2;
       startMoveLidar(target_angle);
+      // ROS_INFO_STREAM("End Lidar Rad: " << target_angle);
+      // ROS_INFO_STREAM("End Lidar Deg: " << target_angle*RADIAN2DEGREE);
       break;
     }
     case StartMove:
@@ -468,8 +471,9 @@ void HeadControlModule::beforeMoveLidar(double start_angle)
   original_position_lidar_ = goal_position_.coeff(0, using_joint_name_["head_p"]);
   moving_time_ = fabs(current_position_.coeffRef(0, using_joint_name_["head_p"]) - start_angle) / (30 * DEGREE2RADIAN);
   double min_moving_time = 1.0;
-
   moving_time_ = (moving_time_ < min_moving_time) ? min_moving_time : moving_time_;
+
+  ROS_INFO_STREAM("Scan Lidar Moving Time: " << moving_time_);
 
   // moving_time_ = 1.0;
 

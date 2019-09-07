@@ -37,6 +37,7 @@
 
 #include "robotis_framework_common/motion_module.h"
 #include "robotis_math/robotis_math.h"
+#include "robotis_math/robotis_math_base.h"
 #include "thormang3_head_control_module_msgs/HeadJointPose.h"
 
 namespace thormang3
@@ -55,6 +56,7 @@ class HeadControlModule : public robotis_framework::MotionModule, public robotis
   bool isRunning();
 
  private:
+
   const double SCAN_START_ANGLE = -10 * M_PI / 180;
   const double SCAN_END_ANGLE = 85 * M_PI / 180;
 

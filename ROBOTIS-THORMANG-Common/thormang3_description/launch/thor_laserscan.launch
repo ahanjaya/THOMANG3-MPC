@@ -7,6 +7,8 @@
     <param name="publish_multiecho" value="false" />
     <param name="angle_min" value="-0.785398" />
     <param name="angle_max" value="0.785398" />
+    <!-- <param name="angle_min" value="-0.349066" />
+    <param name="angle_max" value="0.349066" /> -->
     <remap from="/scan" to="/robotis/sensor/scan" />
   </node>
 </launch>
