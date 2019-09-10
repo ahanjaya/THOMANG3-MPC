@@ -24,10 +24,10 @@ dynamixel | /dev/ttyUSB1 | 7   | H54-100-S500-R | 2.0      | r_arm_el_y   | pres
 dynamixel | /dev/ttyUSB0 | 8   | H54-100-S500-R | 2.0      | l_arm_el_y   | present_position, present_velocity, present_current
 dynamixel | /dev/ttyUSB3 | 9   | Seed-67        | 1.0      | r_arm_wr_r   | present_position
 dynamixel | /dev/ttyUSB2 | 10  | Seed-67        | 1.0      | l_arm_wr_r   | present_position
-dynamixel | /dev/ttyUSB3 | 11  | Seed-67-R      | 1.0      | r_arm_wr_y   | present_position
-dynamixel | /dev/ttyUSB2 | 12  | Seed-67-R      | 1.0      | l_arm_wr_y   | present_position
-dynamixel | /dev/ttyUSB3 | 13  | Seed-67-R      | 1.0      | r_arm_wr_p   | present_position
-dynamixel | /dev/ttyUSB2 | 14  | Seed-67-R      | 1.0      | l_arm_wr_p   | present_position
+dynamixel | /dev/ttyUSB3 | 11  | Seed-67-Y      | 1.0      | r_arm_wr_y   | present_position
+dynamixel | /dev/ttyUSB2 | 12  | Seed-67-Y      | 1.0      | l_arm_wr_y   | present_position
+dynamixel | /dev/ttyUSB3 | 13  | Seed-67-P      | 1.0      | r_arm_wr_p   | present_position
+dynamixel | /dev/ttyUSB2 | 14  | Seed-67-P      | 1.0      | l_arm_wr_p   | present_position
 dynamixel | /dev/ttyUSB1 | 27  | H54-100-S500-R | 2.0      | torso_y      | present_position, present_velocity, present_current
 dynamixel | /dev/ttyUSB0 | 28  | H42-20-S300-R  | 2.0      | head_y       | present_position, present_velocity, present_current
 dynamixel | /dev/ttyUSB0 | 29  | H42-20-S300-R  | 2.0      | head_p       | present_position, present_velocity, present_current

@@ -13,12 +13,12 @@ tar_pose :
   6 : -6.61		# l_arm_sh_p2
   7 : -28.33	# r_arm_el_y
   8 : 28.33		# l_arm_el_y
-  9 : 60	    # r_arm_wr_r
-  10 : -60	  # l_arm_wr_r
-  11 : 9.02 	# r_arm_wr_y
-  12 : -9.02	# l_arm_wr_y
-  13 : -4.88	# r_arm_wr_p
-  14 : -4.88		# l_arm_wr_p
+  9 : 150	    # r_arm_wr_r
+  10 : -150	  # l_arm_wr_r
+  11 : 20 	# r_arm_wr_y 9.02 
+  12 : -20	# l_arm_wr_y -9.02
+  13 : -5	# r_arm_wr_p  -4.88
+  14 : -5		# l_arm_wr_p -4.88
   # 9 : -60.435	# r_arm_wr_r
   # 10 : 60.435	# l_arm_wr_r
   # 11 : 9.18		# r_arm_wr_y

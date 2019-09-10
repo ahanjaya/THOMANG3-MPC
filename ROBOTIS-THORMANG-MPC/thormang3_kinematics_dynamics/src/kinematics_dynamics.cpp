@@ -256,7 +256,7 @@ KinematicsDynamics::KinematicsDynamics(TreeSelect tree)
     thormang3_link_data_[11]->child_              =  13;
     thormang3_link_data_[11]->mass_               =  0.768;
     // thormang3_link_data_[11]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.039 , 0.000 , 0.045 );    
-    thormang3_link_data_[11]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.17 , 0.000 , 0.000 );
+    thormang3_link_data_[11]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.17 , 0.000 , -0.015 );
     thormang3_link_data_[11]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , -1.0 );
     // thormang3_link_data_[11]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.023 , -0.001 , -0.046 );
     thormang3_link_data_[11]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.000 , 0.000 , 0.000 );
@@ -271,7 +271,7 @@ KinematicsDynamics::KinematicsDynamics(TreeSelect tree)
     thormang3_link_data_[13]->child_              =  31;
     thormang3_link_data_[13]->mass_               =  0.565;
     // thormang3_link_data_[13]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.045 , 0.045 , -0.045 );
-    thormang3_link_data_[13]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
+    thormang3_link_data_[13]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.0 , 0.03 , 0.015 );
     thormang3_link_data_[13]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 1.0 , 0.0 );
     // thormang3_link_data_[13]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.065 , -0.045 , 0.000 );
     thormang3_link_data_[13]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
@@ -286,7 +286,7 @@ KinematicsDynamics::KinematicsDynamics(TreeSelect tree)
     thormang3_link_data_[31]->child_              =  -1;
     thormang3_link_data_[31]->mass_               =  0.013;
     // thormang3_link_data_[31]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.088 , -0.058 , 0.000 );
-    thormang3_link_data_[31]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
+    thormang3_link_data_[31]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.07 , 0.005 , 0.04 );
     thormang3_link_data_[31]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 1.0 );
     thormang3_link_data_[31]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
     thormang3_link_data_[31]->joint_limit_max_    =  0.5 * M_PI;
@@ -300,7 +300,7 @@ KinematicsDynamics::KinematicsDynamics(TreeSelect tree)
     thormang3_link_data_[33]->child_              =  -1;
     thormang3_link_data_[33]->mass_               =  0.013;
     // thormang3_link_data_[33]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.088 , -0.0332 , 0.000 );
-    thormang3_link_data_[33]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.0 , 0.0, 0.0 );
+    thormang3_link_data_[33]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.07 , -0.065, 0.04 );
     thormang3_link_data_[33]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 1.0 );
     thormang3_link_data_[33]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
     thormang3_link_data_[33]->joint_limit_max_    =  0.5 * M_PI;
@@ -314,7 +314,7 @@ KinematicsDynamics::KinematicsDynamics(TreeSelect tree)
     thormang3_link_data_[35]->child_              =  -1;
     thormang3_link_data_[35]->mass_               =  0.0;
     // thormang3_link_data_[35]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.145 , -0.045 , 0.0 );
-    thormang3_link_data_[35]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.05 , 0.0 , 0.0 );
+    thormang3_link_data_[35]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.153 , -0.005 , 0.04 );
     thormang3_link_data_[35]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
     thormang3_link_data_[35]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
     thormang3_link_data_[35]->joint_limit_max_    =  100.0;
@@ -384,8 +384,8 @@ KinematicsDynamics::KinematicsDynamics(TreeSelect tree)
     thormang3_link_data_[10]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.171 , 0.030 , -0.057 );
     thormang3_link_data_[10]->joint_axis_         =  robotis_framework::getTransitionXYZ( 1.0 , 0.0 , 0.0 );
     thormang3_link_data_[10]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.010 , 0.000 , 0.002 );
-    thormang3_link_data_[10]->joint_limit_max_    =  0.9 * M_PI;
-    thormang3_link_data_[10]->joint_limit_min_    =  -0.9 * M_PI;
+    thormang3_link_data_[10]->joint_limit_max_    =  2 * M_PI;  //0.9 * M_PI;
+    thormang3_link_data_[10]->joint_limit_min_    =  -2 * M_PI; //-0.9 * M_PI;
     thormang3_link_data_[10]->inertia_            =  robotis_framework::getInertiaXYZ( 0.00012 , 0.00000 , 0.00000 , 0.00011 , 0.00000 , 0.00003 );
     
 
@@ -396,7 +396,7 @@ KinematicsDynamics::KinematicsDynamics(TreeSelect tree)
     thormang3_link_data_[12]->child_              =  14;
     thormang3_link_data_[12]->mass_               =  0.768;
     // thormang3_link_data_[12]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.039 , 0.000 , 0.045 );
-    thormang3_link_data_[12]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.17 , 0.0 , 0.0 );
+    thormang3_link_data_[12]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.17 , 0.0 , -0.015 );
     thormang3_link_data_[12]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , -1.0 );
     // thormang3_link_data_[12]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.023 , 0.001 , -0.046 );
     thormang3_link_data_[12]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.000 , 0.000 , 0.000 );
@@ -413,11 +413,11 @@ KinematicsDynamics::KinematicsDynamics(TreeSelect tree)
     // thormang3_link_data_[14]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.045 , -0.045 , -0.045 );
     // thormang3_link_data_[14]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , -1.0 , 0.0 );
     // thormang3_link_data_[14]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.065 , 0.045 , 0.000 );
-    thormang3_link_data_[14]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
+    thormang3_link_data_[14]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.0 , -0.03 , 0.015 );
     thormang3_link_data_[14]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 1.0 , 0.0 );
     thormang3_link_data_[14]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.000 , 0.000 , 0.000 );
-    thormang3_link_data_[14]->joint_limit_max_    =  0.25 * M_PI;
-    thormang3_link_data_[14]->joint_limit_min_    =  -0.25 * M_PI;
+    thormang3_link_data_[14]->joint_limit_max_    =  2 * M_PI;//0.25 * M_PI;
+    thormang3_link_data_[14]->joint_limit_min_    =  -2 * M_PI;//-0.25 * M_PI;
     thormang3_link_data_[14]->inertia_            =  robotis_framework::getInertiaXYZ( 0.00047 , -0.00001 , 0.00000 , 0.00042 , 0.00000 , 0.00058 );
 
     // left arm gripper
@@ -427,7 +427,7 @@ KinematicsDynamics::KinematicsDynamics(TreeSelect tree)
     thormang3_link_data_[30]->child_              =  -1;
     thormang3_link_data_[30]->mass_               =  0.013;
     // thormang3_link_data_[30]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.088 , 0.058 , 0.000 );
-    thormang3_link_data_[30]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
+    thormang3_link_data_[30]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.07 , -0.005 , 0.04 );
     thormang3_link_data_[30]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 1.0 );
     thormang3_link_data_[30]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
     thormang3_link_data_[30]->joint_limit_max_    =  0.5 * M_PI;
@@ -441,7 +441,7 @@ KinematicsDynamics::KinematicsDynamics(TreeSelect tree)
     thormang3_link_data_[32]->child_              =  -1;
     thormang3_link_data_[32]->mass_               =  0.013;
     // thormang3_link_data_[32]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.088 , 0.032 , 0.000 );
-    thormang3_link_data_[32]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
+    thormang3_link_data_[32]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.07 , 0.065 , 0.04 );
     thormang3_link_data_[32]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 1.0 );
     thormang3_link_data_[32]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
     thormang3_link_data_[32]->joint_limit_max_    =  0.5 * M_PI;
@@ -455,7 +455,7 @@ KinematicsDynamics::KinematicsDynamics(TreeSelect tree)
     thormang3_link_data_[34]->child_              =  -1;
     thormang3_link_data_[34]->mass_               =  0.0;
     // thormang3_link_data_[34]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.145 , 0.045 , 0.0 );
-    thormang3_link_data_[34]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.05  , 0.0 , 0.0 );
+    thormang3_link_data_[34]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.153  , 0.005 , 0.04 );
     thormang3_link_data_[34]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
     thormang3_link_data_[34]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
     thormang3_link_data_[34]->joint_limit_max_    =  100.0;

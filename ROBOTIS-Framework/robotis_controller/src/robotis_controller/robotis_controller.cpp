@@ -31,6 +31,8 @@ using namespace robotis_framework;
 RobotisController::RobotisController()
   : is_timer_running_(false),
     is_offset_enabled_(true),
+    is_typing_enabled_(false),
+    is_align_keyb_enabled_(false),
     stop_timer_(false),
     init_pose_loaded_(false),
     timer_thread_(0),
@@ -525,6 +527,10 @@ void RobotisController::msgQueueThread()
                                                                &RobotisController::setJointStatesCallback, this);
   ros::Subscriber enable_offset_sub       = ros_node.subscribe("/robotis/enable_offset", 10,
                                                                &RobotisController::enableOffsetCallback, this);
+  ros::Subscriber enable_typing_sub       = ros_node.subscribe("/robotis/enable_typing", 10,
+                                                               &RobotisController::enableTypingCallback, this);
+  ros::Subscriber enable_align_key_sub    = ros_node.subscribe("/robotis/enable_align_keyboard", 10,
+                                                               &RobotisController::enableAlignKeyCallback, this);
 
   ros::Subscriber gazebo_joint_states_sub;
   if (gazebo_mode_ == true)
@@ -1067,6 +1073,25 @@ void RobotisController::process()
                 else
                   pos_data= dxl->convertRadian2Value(dxl_state->goal_position_);
 
+                if (is_typing_enabled_)
+                {
+                  if ( joint_name.compare("l_arm_wr_r") == 0 )
+                    pos_data = dxl->convertRadian2Value(3.14);
+                  else if ( joint_name.compare("l_arm_wr_p") == 0 )
+                    pos_data = dxl->convertRadian2Value(-0.3);
+                  else if ( joint_name.compare("r_arm_wr_r") == 0 )
+                    pos_data = dxl->convertRadian2Value(-3.14);
+                  else if ( joint_name.compare("r_arm_wr_p") == 0 )
+                    pos_data = dxl->convertRadian2Value(-0.3);
+                }
+                else if (is_align_keyb_enabled_)
+                {
+                  if ( joint_name.compare("l_arm_wr_p") == 0 )
+                    pos_data = dxl->convertRadian2Value(-0.4);
+                  else if ( joint_name.compare("r_arm_wr_p") == 0 )
+                    pos_data = dxl->convertRadian2Value(-0.4);
+                }
+                
                 uint8_t sync_write_data[4] = { 0 };
                 sync_write_data[0] = DXL_LOBYTE(DXL_LOWORD(pos_data));
                 sync_write_data[1] = DXL_HIBYTE(DXL_LOWORD(pos_data));
@@ -1403,6 +1428,18 @@ void RobotisController::setJointCtrlModuleCallback(const robotis_controller_msgs
 void RobotisController::enableOffsetCallback(const std_msgs::Bool::ConstPtr &msg)
 {
   is_offset_enabled_ = (bool)msg->data;
+}
+
+void RobotisController::enableTypingCallback(const std_msgs::Bool::ConstPtr &msg)
+{
+  is_typing_enabled_      = (bool)msg->data;
+  is_align_keyb_enabled_ = !is_typing_enabled_;
+}
+
+void RobotisController::enableAlignKeyCallback(const std_msgs::Bool::ConstPtr &msg)
+{
+  is_align_keyb_enabled_ = (bool)msg->data;
+  is_typing_enabled_      = !is_align_keyb_enabled_;
 }
 
 bool RobotisController::getJointCtrlModuleService(robotis_controller_msgs::GetJointModule::Request &req,

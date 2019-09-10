@@ -697,6 +697,8 @@ void ManipulationModule::process(std::map<std::string, robotis_framework::Dynami
     double joint_curr_position = dxl->dxl_state_->present_position_;
     double joint_goal_position = dxl->dxl_state_->goal_position_;
 
+    // ROS_INFO_STREAM(joint_name << joint_goal_position);
+
     present_joint_position_(joint_name_to_id_[joint_name]) = joint_curr_position;
     goal_joint_position_(joint_name_to_id_[joint_name]) = joint_goal_position;
   }
@@ -841,7 +843,7 @@ void ManipulationModule::process(std::map<std::string, robotis_framework::Dynami
     else
     {
       for (int id = 1; id <= MAX_JOINT_ID; id++)
-        if (id % 2 != 0)
+        if (id % 2 != 0) // && id != 13)  // ganjil (odd)
           goal_joint_position_(id) = goal_joint_tra_(cnt_right_, id);
     }
     cnt_right_++;
@@ -863,6 +865,19 @@ void ManipulationModule::process(std::map<std::string, robotis_framework::Dynami
       state_iter != result_.end(); state_iter++)
   {
     std::string joint_name = state_iter->first;
+
+    // if ( joint_name.compare("l_arm_wr_r") == 0 )
+    // {
+    //   result_[joint_name]->goal_position_ = 3.14;
+    //   // ROS_INFO_STREAM(joint_name);
+    // }
+    // else if ( joint_name.compare("l_arm_wr_p") == 0 )
+    // {
+    //   result_[joint_name]->goal_position_ = -0.3;
+    //   // ROS_INFO_STREAM(joint_name);
+    // }
+    // else
+    //   result_[joint_name]->goal_position_ = goal_joint_position_(joint_name_to_id_[joint_name]);
     result_[joint_name]->goal_position_ = goal_joint_position_(joint_name_to_id_[joint_name]);
   }
 
