@@ -8,10 +8,7 @@ control_cycle = 10   # milliseconds
 /dev/ttyUSB1 | 1000000  | r_arm_sh_p1
 /dev/ttyUSB2 | 1000000  | l_arm_wr_r
 /dev/ttyUSB3 | 1000000  | r_arm_wr_r
-
-#/dev/ttyUSB2 | 2000000  | l_arm_sh_p1 #Broken!
-#/dev/ttyUSB3 | 2000000  | r_leg_hip_y #Broken!
-    
+   
 [ device info ]
 # TYPE    | PORT NAME    | ID  | MODEL          | PROTOCOL | DEV NAME     | BULK READ ITEMS
 dynamixel | /dev/ttyUSB1 | 1   | H54-100-S500-R | 2.0      | r_arm_sh_p1  | present_position, present_velocity, present_current

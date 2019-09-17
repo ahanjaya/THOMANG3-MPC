@@ -1605,7 +1605,16 @@ void RobotisController::setJointCtrlModuleThread(const robotis_controller_msgs::
           if(_result_it == (*_m_it)->result_.end())
             break;
 
-          _dxl->ctrl_module_name_ = ctrl_module;
+          if ( joint_name.compare("r_arm_thumb_y")    != 0 && joint_name.compare("r_arm_thumb_y")    != 0 && 
+               joint_name.compare("r_arm_thumb_p")    != 0 && joint_name.compare("l_arm_thumb_p")    != 0 && 
+               joint_name.compare("r_arm_index_p")    != 0 && joint_name.compare("l_arm_index_p")    != 0 && 
+               joint_name.compare("r_arm_middle_p")   != 0 && joint_name.compare("l_arm_middle_p")   != 0 &&
+               joint_name.compare("r_arm_finger45_p") != 0 && joint_name.compare("l_arm_finger45_p") != 0 )
+          {
+            _dxl->ctrl_module_name_ = ctrl_module;
+          }
+
+          // _dxl->ctrl_module_name_ = ctrl_module;
 
           // enqueue enable module list
           _enable_modules.push_back(*_m_it);
@@ -1820,33 +1829,59 @@ void RobotisController::setCtrlModuleThread(std::string ctrl_module)
           auto d_it = robot_->dxls_.find(result_it.first);
           if (d_it != robot_->dxls_.end())
           {
-            Dynamixel *dxl = d_it->second;
-            dxl->ctrl_module_name_ = ctrl_module;
+            std::string joint_name = d_it->first;
+            Dynamixel *dxl         = d_it->second;
+            
+            if ( joint_name.compare("r_arm_thumb_y")    != 0 && joint_name.compare("r_arm_thumb_y")    != 0 && 
+                 joint_name.compare("r_arm_thumb_p")    != 0 && joint_name.compare("l_arm_thumb_p")    != 0 && 
+                 joint_name.compare("r_arm_index_p")    != 0 && joint_name.compare("l_arm_index_p")    != 0 && 
+                 joint_name.compare("r_arm_middle_p")   != 0 && joint_name.compare("l_arm_middle_p")   != 0 &&
+                 joint_name.compare("r_arm_finger45_p") != 0 && joint_name.compare("l_arm_finger45_p") != 0 )
+            {
+              dxl->ctrl_module_name_ = ctrl_module;
+            }
 
             if (gazebo_mode_ == true)
               continue;
 
             if (mode == PositionControl)
             {
-              uint32_t pos_data;
-              if(is_offset_enabled_)
-                pos_data = dxl->convertRadian2Value(dxl->dxl_state_->goal_position_ + dxl->dxl_state_->position_offset_);
-              else
-                pos_data = dxl->convertRadian2Value(dxl->dxl_state_->goal_position_);
+              // if ( strcmp(dxl->port_name_.c_str(), "/dev/ttyUSB0") == 0 || strcmp(dxl->port_name_.c_str(), "/dev/ttyUSB1") == 0) // <-- Dynamixel PRO
+              // {
+                uint32_t pos_data;
+                if(is_offset_enabled_)
+                  pos_data = dxl->convertRadian2Value(dxl->dxl_state_->goal_position_ + dxl->dxl_state_->position_offset_);
+                else
+                  pos_data = dxl->convertRadian2Value(dxl->dxl_state_->goal_position_);
 
-              uint8_t sync_write_data[4] = { 0 };
-              sync_write_data[0] = DXL_LOBYTE(DXL_LOWORD(pos_data));
-              sync_write_data[1] = DXL_HIBYTE(DXL_LOWORD(pos_data));
-              sync_write_data[2] = DXL_LOBYTE(DXL_HIWORD(pos_data));
-              sync_write_data[3] = DXL_HIBYTE(DXL_HIWORD(pos_data));
+                uint8_t sync_write_data[4] = { 0 };
+                sync_write_data[0] = DXL_LOBYTE(DXL_LOWORD(pos_data));
+                sync_write_data[1] = DXL_HIBYTE(DXL_LOWORD(pos_data));
+                sync_write_data[2] = DXL_LOBYTE(DXL_HIWORD(pos_data));
+                sync_write_data[3] = DXL_HIBYTE(DXL_HIWORD(pos_data));
 
-              if (port_to_sync_write_position_[dxl->port_name_] != NULL)
-                port_to_sync_write_position_[dxl->port_name_]->addParam(dxl->id_, sync_write_data);
+                if (port_to_sync_write_position_[dxl->port_name_] != NULL)
+                  port_to_sync_write_position_[dxl->port_name_]->addParam(dxl->id_, sync_write_data);
 
-              if (port_to_sync_write_current_[dxl->port_name_] != NULL)
-                port_to_sync_write_current_[dxl->port_name_]->removeParam(dxl->id_);
-              if (port_to_sync_write_velocity_[dxl->port_name_] != NULL)
-                port_to_sync_write_velocity_[dxl->port_name_]->removeParam(dxl->id_);
+                if (port_to_sync_write_current_[dxl->port_name_] != NULL)
+                  port_to_sync_write_current_[dxl->port_name_]->removeParam(dxl->id_);
+                if (port_to_sync_write_velocity_[dxl->port_name_] != NULL)
+                  port_to_sync_write_velocity_[dxl->port_name_]->removeParam(dxl->id_);
+              // }
+              // else  // Seed Robotics
+              // {
+              //   // ROS_INFO_STREAM(dxl->port_name_.c_str());
+              //   // ROS_INFO_STREAM("Joint Name : " << joint_name << " value: "<< seed_init[joint_name]);
+
+              //   uint8_t   sync_write_data[4];
+              //   uint32_t read_data;
+              //   read_data = dxl->convertRadian2Value(seed_init[joint_name]);
+              //   sync_write_data[0] = DXL_LOBYTE(DXL_LOWORD(read_data));
+              //   sync_write_data[1] = DXL_HIBYTE(DXL_LOWORD(read_data));
+              //   sync_write_data[2] = DXL_LOBYTE(DXL_HIWORD(read_data));
+              //   sync_write_data[3] = DXL_HIBYTE(DXL_HIWORD(read_data));
+              //   port_to_sync_write_position_[dxl->port_name_]->addParam(dxl->id_, sync_write_data);
+              // }
             }
             else if (mode == VelocityControl)
             {
@@ -1881,7 +1916,7 @@ void RobotisController::setCtrlModuleThread(std::string ctrl_module)
                 port_to_sync_write_velocity_[dxl->port_name_]->removeParam(dxl->id_);
               if (port_to_sync_write_position_[dxl->port_name_] != NULL)
                 port_to_sync_write_position_[dxl->port_name_]->removeParam(dxl->id_);
-            }
+            } 
           }
         }
 

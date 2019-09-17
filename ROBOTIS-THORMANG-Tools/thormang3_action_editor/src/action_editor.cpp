@@ -329,8 +329,8 @@ bool ActionEditor::initializeActionEditor(std::string robot_file_path, std::stri
         8);
   }
 
-  default_editor_script_path_ = ros::package::getPath("op3_action_editor") + "/script/editor_script.yaml";
-  mirror_joint_file_path_ = ros::package::getPath("op3_action_editor") + "/config/config_mirror_joint.yaml";
+  default_editor_script_path_ = ros::package::getPath("thormang3_action_editor") + "/script/editor_script.yaml";
+  mirror_joint_file_path_     = ros::package::getPath("thormang3_action_editor") + "/config/config_mirror_joint.yaml";
 
   // for mirroring
   upper_body_mirror_joints_rl_.clear();
