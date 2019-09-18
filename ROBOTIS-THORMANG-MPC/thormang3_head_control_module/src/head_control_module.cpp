@@ -144,7 +144,8 @@ void HeadControlModule::get3DLidarRangeCallback(const std_msgs::Float64::ConstPt
     // turn off direct control and move head joint in order to make pointcloud
     is_direct_control_ = false;
     scan_range_ = msg->data;
-    double start_angle = current_position_.coeffRef(0, using_joint_name_["head_p"]) - scan_range_;
+    // double start_angle = current_position_.coeffRef(0, using_joint_name_["head_p"]) - scan_range_;
+    double start_angle = current_position_.coeffRef(0, using_joint_name_["head_p"]) + scan_range_;
     // ROS_INFO_STREAM("Start Lidar Rad: " << start_angle);
     // ROS_INFO_STREAM("Start Lidar Deg: " << start_angle*RADIAN2DEGREE);
     beforeMoveLidar(start_angle);
@@ -404,7 +405,8 @@ void HeadControlModule::finishMoving()
       // generate start trajectory
       double target_angle =
           (scan_range_ == 0) ?
-              SCAN_END_ANGLE : current_position_.coeffRef(0, using_joint_name_["head_p"]) + scan_range_ * 2;
+              // SCAN_END_ANGLE : current_position_.coeffRef(0, using_joint_name_["head_p"]) + scan_range_ * 2;
+              SCAN_END_ANGLE : current_position_.coeffRef(0, using_joint_name_["head_p"]) - scan_range_ * 2;
       startMoveLidar(target_angle);
       // ROS_INFO_STREAM("End Lidar Rad: " << target_angle);
       // ROS_INFO_STREAM("End Lidar Deg: " << target_angle*RADIAN2DEGREE);
