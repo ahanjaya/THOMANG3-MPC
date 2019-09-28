@@ -6,8 +6,8 @@ control_cycle = 10   # milliseconds
 # PORT NAME  | BAUDRATE | DEFAULT JOINT
 /dev/ttyUSB0 | 1000000  | l_arm_sh_p1
 /dev/ttyUSB1 | 1000000  | r_arm_sh_p1
-#/dev/ttyUSB2 | 1000000  | l_arm_wr_r
-#/dev/ttyUSB3 | 1000000  | r_arm_wr_r
+/dev/ttyUSB2 | 1000000  | l_arm_wr_r
+/dev/ttyUSB3 | 1000000  | r_arm_wr_r
    
 [ device info ]
 # TYPE    | PORT NAME    | ID  | MODEL          | PROTOCOL | DEV NAME     | BULK READ ITEMS
@@ -19,12 +19,12 @@ dynamixel | /dev/ttyUSB1 | 5   | H54-100-S500-R | 2.0      | r_arm_sh_p2  | pres
 dynamixel | /dev/ttyUSB0 | 6   | H54-100-S500-R | 2.0      | l_arm_sh_p2  | present_position, present_velocity, present_current
 dynamixel | /dev/ttyUSB1 | 7   | H54-100-S500-R | 2.0      | r_arm_el_y   | present_position, present_velocity, present_current
 dynamixel | /dev/ttyUSB0 | 8   | H54-100-S500-R | 2.0      | l_arm_el_y   | present_position, present_velocity, present_current
-#dynamixel | /dev/ttyUSB3 | 9   | Seed-67        | 1.0      | r_arm_wr_r   | present_position
-#dynamixel | /dev/ttyUSB2 | 10  | Seed-67        | 1.0      | l_arm_wr_r   | present_position
-#dynamixel | /dev/ttyUSB3 | 11  | Seed-67-Y      | 1.0      | r_arm_wr_y   | present_position
-#dynamixel | /dev/ttyUSB2 | 12  | Seed-67-Y      | 1.0      | l_arm_wr_y   | present_position
-#dynamixel | /dev/ttyUSB3 | 13  | Seed-67-P      | 1.0      | r_arm_wr_p   | present_position
-#dynamixel | /dev/ttyUSB2 | 14  | Seed-67-P      | 1.0      | l_arm_wr_p   | present_position
+dynamixel | /dev/ttyUSB3 | 9   | Seed-67        | 1.0      | r_arm_wr_r   | present_position
+dynamixel | /dev/ttyUSB2 | 10  | Seed-67        | 1.0      | l_arm_wr_r   | present_position
+dynamixel | /dev/ttyUSB3 | 11  | Seed-67-Y      | 1.0      | r_arm_wr_y   | present_position
+dynamixel | /dev/ttyUSB2 | 12  | Seed-67-Y      | 1.0      | l_arm_wr_y   | present_position
+dynamixel | /dev/ttyUSB3 | 13  | Seed-67-P      | 1.0      | r_arm_wr_p   | present_position
+dynamixel | /dev/ttyUSB2 | 14  | Seed-67-P      | 1.0      | l_arm_wr_p   | present_position
 dynamixel | /dev/ttyUSB1 | 27  | H54-100-S500-R | 2.0      | torso_y      | present_position, present_velocity, present_current
 dynamixel | /dev/ttyUSB0 | 28  | H42-20-S300-R  | 2.0      | head_y       | present_position, present_velocity, present_current
 dynamixel | /dev/ttyUSB0 | 29  | H42-20-S300-R  | 2.0      | head_p       | present_position, present_velocity, present_current
@@ -34,16 +34,16 @@ dynamixel | /dev/ttyUSB0 | 29  | H42-20-S300-R  | 2.0      | head_p       | pres
 #sensor    | /dev/ttyUSB4 | 101 | SEED-EROSBRD   | 1.0      | r_arm_board        | model_number
 #sensor    | /dev/ttyUSB4 | 102 | SEED-EROSBRD   | 1.0      | l_arm_board        | model_number
 
-#dynamixel | /dev/ttyUSB3 | 103 | Seed-56        | 1.0      | r_arm_thumb_y      | present_position
-#dynamixel | /dev/ttyUSB2 | 104 | Seed-56        | 1.0      | l_arm_thumb_y      | present_position
-#dynamixel | /dev/ttyUSB3 | 105 | Seed-56        | 1.0      | r_arm_thumb_p      | present_position
-#dynamixel | /dev/ttyUSB2 | 106 | Seed-56        | 1.0      | l_arm_thumb_p      | present_position
-#dynamixel | /dev/ttyUSB3 | 107 | Seed-56        | 1.0      | r_arm_index_p      | present_position
-#dynamixel | /dev/ttyUSB2 | 108 | Seed-56        | 1.0      | l_arm_index_p      | present_position
-#dynamixel | /dev/ttyUSB3 | 109 | Seed-56        | 1.0      | r_arm_middle_p     | present_position
-#dynamixel | /dev/ttyUSB2 | 110 | Seed-56        | 1.0      | l_arm_middle_p     | present_position
-#dynamixel | /dev/ttyUSB3 | 111 | Seed-56        | 1.0      | r_arm_finger45_p   | present_position
-#dynamixel | /dev/ttyUSB2 | 112 | Seed-56        | 1.0      | l_arm_finger45_p   | present_position
+dynamixel | /dev/ttyUSB3 | 103 | Seed-56        | 1.0      | r_arm_thumb_y      | present_position
+dynamixel | /dev/ttyUSB2 | 104 | Seed-56        | 1.0      | l_arm_thumb_y      | present_position
+dynamixel | /dev/ttyUSB3 | 105 | Seed-56        | 1.0      | r_arm_thumb_p      | present_position
+dynamixel | /dev/ttyUSB2 | 106 | Seed-56        | 1.0      | l_arm_thumb_p      | present_position
+dynamixel | /dev/ttyUSB3 | 107 | Seed-56        | 1.0      | r_arm_index_p      | present_position
+dynamixel | /dev/ttyUSB2 | 108 | Seed-56        | 1.0      | l_arm_index_p      | present_position
+dynamixel | /dev/ttyUSB3 | 109 | Seed-56        | 1.0      | r_arm_middle_p     | present_position
+dynamixel | /dev/ttyUSB2 | 110 | Seed-56        | 1.0      | l_arm_middle_p     | present_position
+dynamixel | /dev/ttyUSB3 | 111 | Seed-56        | 1.0      | r_arm_finger45_p   | present_position
+dynamixel | /dev/ttyUSB2 | 112 | Seed-56        | 1.0      | l_arm_finger45_p   | present_position
 
 ################################################################################################################
 ## Robot Original Arms
