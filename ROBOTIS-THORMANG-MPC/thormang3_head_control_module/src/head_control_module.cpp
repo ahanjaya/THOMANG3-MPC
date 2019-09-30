@@ -49,10 +49,10 @@ HeadControlModule::HeadControlModule()
   using_joint_name_["head_y"] = 0;
   using_joint_name_["head_p"] = 1;
 
-  target_position_ = Eigen::MatrixXd::Zero(1, result_.size());
-  current_position_ = Eigen::MatrixXd::Zero(1, result_.size());
-  goal_position_ = Eigen::MatrixXd::Zero(1, result_.size());
-  goal_velocity_ = Eigen::MatrixXd::Zero(1, result_.size());
+  target_position_   = Eigen::MatrixXd::Zero(1, result_.size());
+  current_position_  = Eigen::MatrixXd::Zero(1, result_.size());
+  goal_position_     = Eigen::MatrixXd::Zero(1, result_.size());
+  goal_velocity_     = Eigen::MatrixXd::Zero(1, result_.size());
   goal_acceleration_ = Eigen::MatrixXd::Zero(1, result_.size());
 
   tra_gene_thread_ = 0;
@@ -72,8 +72,8 @@ void HeadControlModule::initialize(const int control_cycle_msec, robotis_framewo
   ros::NodeHandle ros_node;
 
   /* publish topics */
-  moving_head_pub_ = ros_node.advertise<std_msgs::String>("/robotis/sensor/move_lidar", 0);
-  status_msg_pub_ = ros_node.advertise<robotis_controller_msgs::StatusMsg>("/robotis/status", 0);
+  moving_head_pub_   = ros_node.advertise<std_msgs::String>("/robotis/sensor/move_lidar", 0);
+  status_msg_pub_    = ros_node.advertise<robotis_controller_msgs::StatusMsg>("/robotis/status", 0);
   movement_done_pub_ = ros_node.advertise<std_msgs::String>("/robotis/movement_done", 1);
 }
 
@@ -85,14 +85,16 @@ void HeadControlModule::queueThread()
   ros_node.setCallbackQueue(&callback_queue);
 
   /* subscribe topics */
-  ros::Subscriber get_3d_lidar_sub = ros_node.subscribe("/robotis/head_control/move_lidar", 1,
+  ros::Subscriber get_3d_lidar_sub        = ros_node.subscribe("/robotis/head_control/move_lidar", 1,
                                                         &HeadControlModule::get3DLidarCallback, this);
-  ros::Subscriber get_3d_lidar_range_sub = ros_node.subscribe("/robotis/head_control/move_lidar_with_range", 1,
+  ros::Subscriber get_3d_lidar_range_sub  = ros_node.subscribe("/robotis/head_control/move_lidar_with_range", 1,
                                                               &HeadControlModule::get3DLidarRangeCallback, this);
-  ros::Subscriber set_head_joint_sub = ros_node.subscribe("/robotis/head_control/set_joint_states", 1,
+  ros::Subscriber set_head_joint_sub      = ros_node.subscribe("/robotis/head_control/set_joint_states", 1,
                                                           &HeadControlModule::setHeadJointCallback, this);
   ros::Subscriber set_head_joint_time_sub = ros_node.subscribe("/robotis/head_control/set_joint_states_time", 1,
                                                                &HeadControlModule::setHeadJointTimeCallback, this);
+  ros::Subscriber set_original_pos_lidar_sub = ros_node.subscribe("/robotis/head_control/set_original_pos_lidar", 1,
+                                                               &HeadControlModule::setOriginalPosLidarCallback, this);
 
   ros::WallDuration duration(control_cycle_msec_ / 1000.0);
   while (ros_node.ok())
@@ -291,6 +293,12 @@ void HeadControlModule::setHeadJointTimeCallback(const thormang3_head_control_mo
   delete tra_gene_thread_;
 }
 
+void HeadControlModule::setOriginalPosLidarCallback(const std_msgs::Float64::ConstPtr &msg)
+{
+  original_position_lidar_ = msg->data * M_PI / 180;
+  ROS_INFO_STREAM("override original poisition lidar: " << original_position_lidar_);
+}
+
 void HeadControlModule::process(std::map<std::string, robotis_framework::Dynamixel *> dxls,
                                 std::map<std::string, double> sensors)
 {
@@ -394,8 +402,8 @@ void HeadControlModule::finishMoving()
 {
   // init value
   calc_joint_tra_ = goal_position_;
-  tra_size_ = 0;
-  tra_count_ = 0;
+  tra_size_       = 0;
+  tra_count_      = 0;
 
   // handle lidar state
   switch (current_state_)
@@ -471,12 +479,13 @@ void HeadControlModule::beforeMoveLidar(double start_angle)
 {
   // angle and moving time
   original_position_lidar_ = goal_position_.coeff(0, using_joint_name_["head_p"]);
-  moving_time_ = fabs(current_position_.coeffRef(0, using_joint_name_["head_p"]) - start_angle) / (30 * DEGREE2RADIAN);
-  double min_moving_time = 1.0;
-  moving_time_ = (moving_time_ < min_moving_time) ? min_moving_time : moving_time_;
+  ROS_INFO_STREAM("original poisition lidar: " << original_position_lidar_);
+
+  moving_time_             = fabs(current_position_.coeffRef(0, using_joint_name_["head_p"]) - start_angle) / (30 * DEGREE2RADIAN);
+  double min_moving_time   = 1.0;
+  moving_time_             = (moving_time_ < min_moving_time) ? min_moving_time : moving_time_;
 
   ROS_INFO_STREAM("Scan Lidar Moving Time: " << moving_time_);
-
   // moving_time_ = 1.0;
 
   // set target joint angle : pitch
@@ -530,7 +539,7 @@ void HeadControlModule::afterMoveLidar()
   target_position_.coeffRef(0, using_joint_name_["head_p"]) = original_position_lidar_;
 
   // set init joint vel, accel
-  goal_velocity_ = Eigen::MatrixXd::Zero(1, result_.size());
+  goal_velocity_     = Eigen::MatrixXd::Zero(1, result_.size());
   goal_acceleration_ = Eigen::MatrixXd::Zero(1, result_.size());
 
   // generate trajectory

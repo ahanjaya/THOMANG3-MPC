@@ -34,7 +34,6 @@
 #include <eigen3/Eigen/Eigen>
 
 #include "robotis_controller_msgs/StatusMsg.h"
-
 #include "robotis_framework_common/motion_module.h"
 #include "robotis_math/robotis_math.h"
 #include "robotis_math/robotis_math_base.h"
@@ -58,13 +57,14 @@ class HeadControlModule : public robotis_framework::MotionModule, public robotis
  private:
 
   const double SCAN_START_ANGLE = 85 * M_PI / 180; // -10 * M_PI / 180;
-  const double SCAN_END_ANGLE = -10 * M_PI / 180; // 85 * M_PI / 180;
+  const double SCAN_END_ANGLE   = -10 * M_PI / 180; // 85 * M_PI / 180;
 
   /* ROS Topic Callback Functions */
   void get3DLidarCallback(const std_msgs::String::ConstPtr &msg);
   void get3DLidarRangeCallback(const std_msgs::Float64::ConstPtr &msg);
   void setHeadJointCallback(const sensor_msgs::JointState::ConstPtr &msg);
   void setHeadJointTimeCallback(const thormang3_head_control_module_msgs::HeadJointPose::ConstPtr &msg);
+  void setOriginalPosLidarCallback(const std_msgs::Float64::ConstPtr &msg);
 
   void queueThread();
   void jointTraGeneThread();
