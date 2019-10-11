@@ -28,6 +28,7 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <ros/ros.h>
 
 #include "control_table_item.h"
 #include "device.h"

@@ -18,7 +18,7 @@
  * robotis_controller.cpp
  *
  *  Modify on: 2019. 8. 20.
- *      Author: hanjaya
+ *      Editor: hanjaya
  */
 
 #include <ros/package.h>
@@ -150,7 +150,7 @@ void RobotisController::initializeSyncWrite()
             dxl->dxl_state_->present_velocity_ = dxl->convertValue2Velocity(read_data);
             dxl->dxl_state_->goal_velocity_ = dxl->dxl_state_->present_velocity_;
 
-            uint32_t init_vel_data = dxl->convertTorque2Value(0.0);
+            uint32_t init_vel_data = dxl->convertVelocity2Value(0.0);
             sync_write_data[0] = DXL_LOBYTE(DXL_LOWORD(init_vel_data));
             sync_write_data[1] = DXL_HIBYTE(DXL_LOWORD(init_vel_data));
             sync_write_data[2] = DXL_LOBYTE(DXL_HIWORD(init_vel_data));
@@ -164,6 +164,8 @@ void RobotisController::initializeSyncWrite()
           {
             dxl->dxl_state_->present_torque_ = dxl->convertValue2Torque(read_data);
             dxl->dxl_state_->goal_torque_ = dxl->dxl_state_->present_torque_;
+
+            // ROS_INFO_STREAM("Torque Joint Name:" << joint_name);
 
             uint32_t init_curr_data = dxl->convertTorque2Value(0.0);
             sync_write_data[0] = DXL_LOBYTE(DXL_LOWORD(init_curr_data));
@@ -1348,7 +1350,7 @@ void RobotisController::setJointStatesCallback(const sensor_msgs::JointState::Co
     {
       dxl->dxl_state_->goal_velocity_ = (double) msg->velocity[i];
       dxl->dxl_state_->goal_position_ = (double) msg->position[i];
-      dxl->dxl_state_->goal_torque_ = (double) msg->effort[i];
+      dxl->dxl_state_->goal_torque_   = (double) msg->effort[i];
 
       // ROS_INFO_STREAM("Pos. : " << dxl->dxl_state_->goal_position_);
       // ROS_INFO_STREAM("Speed. : " << (double) msg->velocity[i]);
@@ -1370,6 +1372,8 @@ void RobotisController::setJointStatesCallback(const sensor_msgs::JointState::Co
             port_to_sync_write_velocity_[dxl->port_name_]->changeParam(dxl->id_, sync_write_data_vel);
 
           uint32_t curr_data = dxl->convertTorque2Value(dxl->dxl_state_->goal_torque_);
+          // ROS_INFO_STREAM("Curr data. : " << curr_data);
+          
           uint8_t _sync_write_data[2] = { 0 };
           _sync_write_data[0] = DXL_LOBYTE(curr_data);
           _sync_write_data[1] = DXL_HIBYTE(curr_data);
@@ -1713,6 +1717,8 @@ void RobotisController::setCtrlModuleThread(std::string ctrl_module)
 {
   // stop module
   std::list<MotionModule *> stop_modules;
+
+  // ROS_INFO_STREAM("CTRL MODULE: " << ctrl_module);
 
   if (ctrl_module == "" || ctrl_module == "none")
   {
