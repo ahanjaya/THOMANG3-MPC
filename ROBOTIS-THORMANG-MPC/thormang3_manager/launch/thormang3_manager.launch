@@ -1,7 +1,8 @@
 <?xml version="1.0" ?>
 <launch>    
-    <arg name="use_imu" default="false"/>
-    <arg name="use_lidar" default="true" />
+    <arg name="use_imu"   default="false"/>
+    <arg name="use_lidar" default="true"/>
+    <!-- <arg name="use_lidar" default="false"/> -->
     
     <param name="gazebo"                   value="false"    type="bool"/>
     <param name="gazebo_robot_name"        value="thormang3"/>
