@@ -535,7 +535,7 @@ void HeadControlModule::startMoveLidar(double target_angle)
 void HeadControlModule::afterMoveLidar()
 {
   // angle and moving time
-  moving_time_ = 1.0; // 2.0
+  moving_time_ = 2.0; // 2.0
 
   // set target joint angle : pitch
   target_position_ = goal_position_;
