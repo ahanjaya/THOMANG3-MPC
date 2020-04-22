@@ -2,7 +2,7 @@
 <launch>    
     <arg name="use_imu"   default="false"/>
     <arg name="use_lidar" default="true"/>
-    <!-- <arg name="use_lidar" default="false"/> -->
+    <arg name="use_tripod" default="false"/>
     
     <param name="gazebo"                   value="false"    type="bool"/>
     <param name="gazebo_robot_name"        value="thormang3"/>
@@ -26,6 +26,9 @@
     <!-- THORMANG3 Manager -->
     <node pkg="thormang3_manager" type="thormang3_manager" name="thormang3_manager" output="screen"/>
     
+    <!-- tripod webcam -->    
+    <include file="$(find thormang3_manager)/launch/webcam_tripod.launch" if="$(arg use_tripod)"/> 
+
     <!-- Robot Model & TF -->
     <include file="$(find thormang3_description)/launch/thormang3_mpc.launch"/> 
 </launch>
