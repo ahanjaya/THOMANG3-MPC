@@ -30,5 +30,6 @@
     <include file="$(find thormang3_manager)/launch/webcam_tripod.launch" if="$(arg use_tripod)"/> 
 
     <!-- Robot Model & TF -->
-    <include file="$(find thormang3_description)/launch/thormang3_mpc.launch"/> 
+    <!-- <include file="$(find thormang3_description)/launch/thormang3_mpc.launch"/>  -->
+    <include file="$(find thormang3_description)/launch/thormang3_mpc_bear.launch"/> 
 </launch>

@@ -16,7 +16,7 @@ offset:
   l_leg_hip_y: 0
   l_leg_kn_p: 0
   r_arm_el_y: 0
-  r_arm_grip: 0
+  # r_arm_grip: 0
   r_arm_sh_p1: 0
   r_arm_sh_p2: 0
   r_arm_sh_r: 0
@@ -48,7 +48,7 @@ init_pose_for_offset_tuner:
   l_leg_hip_y: 0
   l_leg_kn_p: 0.1570796326794897
   r_arm_el_y: 1.570796326794897
-  r_arm_grip: 0
+  # r_arm_grip: 0
   r_arm_sh_p1: 0
   r_arm_sh_p2: 0
   r_arm_sh_r: 0

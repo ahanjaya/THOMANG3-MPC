@@ -38,7 +38,7 @@ ManipulationModule::ManipulationModule()
     ik_failed_right(false),
     ik_left_solving_(false),
     ik_right_solving_(false),
-    arm_angle_display_(false)
+    arm_angle_display_(true)
 {
   enable_       = false;
   module_name_  = "manipulation_module";

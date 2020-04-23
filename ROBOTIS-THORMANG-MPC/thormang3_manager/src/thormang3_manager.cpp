@@ -32,8 +32,8 @@
 #include "thormang3_action_module/action_module.h"
 #include "thormang3_head_control_module/head_control_module.h"
 #include "thormang3_manipulation_module/manipulation_module.h"
-#include "thormang3_walking_module/walking_module.h"
-#include "thormang3_gripper_module/gripper_module.h"
+// #include "thormang3_walking_module/walking_module.h"
+// #include "thormang3_gripper_module/gripper_module.h"
 
 using namespace thormang3;
 

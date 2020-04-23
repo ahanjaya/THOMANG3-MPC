@@ -1085,6 +1085,7 @@ void RobotisController::process()
                     pos_data = dxl->convertRadian2Value(-3.14);
                   else if ( joint_name.compare("r_arm_wr_p") == 0 )
                     pos_data = dxl->convertRadian2Value(-0.3);
+
                 }
                 else if (is_align_keyb_enabled_)
                 {
@@ -1408,6 +1409,8 @@ void RobotisController::setCtrlModuleCallback(const std_msgs::String::ConstPtr &
     set_module_thread_.join();
 
   std::string _module_name_to_set = msg->data;
+  //  ROS_INFO_STREAM("enable control module : " << msg->data);
+
   set_module_thread_ = boost::thread(boost::bind(&RobotisController::setCtrlModuleThread, this, _module_name_to_set));
 }
 
@@ -1436,14 +1439,36 @@ void RobotisController::enableOffsetCallback(const std_msgs::Bool::ConstPtr &msg
 
 void RobotisController::enableTypingCallback(const std_msgs::Bool::ConstPtr &msg)
 {
-  is_typing_enabled_      = (bool)msg->data;
-  is_align_keyb_enabled_ = !is_typing_enabled_;
+  if ( (bool)msg->data )
+  {
+    is_typing_enabled_     = true;
+    is_align_keyb_enabled_ = false;
+                    
+    ROS_WARN_STREAM("[Ctrl] Typing is enabled");
+    ROS_WARN_STREAM("[Ctrl] Wrist Roll and Pitch is override");
+  }
+  else
+  {
+    is_typing_enabled_ = false;
+    ROS_WARN_STREAM("[Ctrl] Typing is disabled");
+  }
 }
 
 void RobotisController::enableAlignKeyCallback(const std_msgs::Bool::ConstPtr &msg)
 {
-  is_align_keyb_enabled_ = (bool)msg->data;
-  is_typing_enabled_      = !is_align_keyb_enabled_;
+  if ( (bool)msg->data )
+  {
+    is_align_keyb_enabled_ = true;
+    is_typing_enabled_     = false;
+
+    ROS_WARN_STREAM("[Ctrl] Align keybaord is enabled");
+    ROS_WARN_STREAM("[Ctrl] Wrist Pitch is override");
+  }
+  else
+  {
+    is_align_keyb_enabled_ = false;
+    ROS_WARN_STREAM("[Ctrl] Align keyboard is disabled");
+  }
 }
 
 bool RobotisController::getJointCtrlModuleService(robotis_controller_msgs::GetJointModule::Request &req,
@@ -1718,7 +1743,7 @@ void RobotisController::setCtrlModuleThread(std::string ctrl_module)
   // stop module
   std::list<MotionModule *> stop_modules;
 
-  // ROS_INFO_STREAM("CTRL MODULE: " << ctrl_module);
+  ROS_INFO_STREAM("Control Module: " << ctrl_module);
 
   if (ctrl_module == "" || ctrl_module == "none")
   {
@@ -1781,6 +1806,7 @@ void RobotisController::setCtrlModuleThread(std::string ctrl_module)
   {
     (*_stop_m_it)->setModuleEnable(false);
   }
+
 
   // set ctrl module
   queue_mutex_.lock();
@@ -1931,6 +1957,7 @@ void RobotisController::setCtrlModuleThread(std::string ctrl_module)
     }
   }
 
+
   for (auto m_it = motion_modules_.begin(); m_it != motion_modules_.end(); m_it++)
   {
     // set all used modules -> enable
@@ -1959,6 +1986,7 @@ void RobotisController::setCtrlModuleThread(std::string ctrl_module)
 
   if (current_module_msg.joint_name.size() == current_module_msg.module_name.size())
     current_module_pub_.publish(current_module_msg);
+  
 }
 
 void RobotisController::gazeboJointStatesCallback(const sensor_msgs::JointState::ConstPtr &msg)
